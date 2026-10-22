@@ -10,7 +10,7 @@
     "CykelNummer": 2,
     "Namn": "Cykel",
     "Timpris": 40,
-    "Uthyrd": true
+    "Uthyrd": false
   },
 
   {

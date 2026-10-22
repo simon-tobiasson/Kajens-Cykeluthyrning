@@ -1,10 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Kajens_CykelUthyrning
+﻿namespace Kajens_CykelUthyrning
 {
-    internal class Kund
+    public class Kund
     {
+        private string kundName { get; set; }
+        private int kundÅlder { get; set; }
+        private bool ärMedlem { get; set; }
+
+        public Kund(string KundName, int KundÅlder, bool ÄrMedlem)
+        {
+            kundName = KundName;
+            kundÅlder = KundÅlder;
+            ärMedlem = ÄrMedlem;
+        }
+
+        public void VisaKundInfo()
+        {
+            Console.WriteLine($"Kundnamn: {kundName}");
+            Console.WriteLine($"Kundålder: {kundÅlder}");
+            Console.WriteLine($"Är medlem: {ärMedlem}");
+        }
+
+
     }
 }

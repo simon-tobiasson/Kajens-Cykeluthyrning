@@ -2,22 +2,27 @@
 {
     public class Fordon
     {
-        protected int cykelNummer;
-        protected string name;
-        protected int timpris;
-        protected bool uthyrd;
+        protected int CykelNummer { get; set; }
+        protected string Name { get; set; }
+        protected int Timpris { get; set; }
+        protected bool Uthyrd { get; set; }
 
-        public Fordon(int CykelNummer, string Name, int Timpris, bool Uthyrd)
+        public Fordon(int cykelNummer, string name, int timpris, bool uthyrd)
         {
-            cykelNummer = CykelNummer;
-            name = Name;
-            timpris = Timpris;
-            uthyrd = Uthyrd;
+            CykelNummer = cykelNummer;
+            Name = name;
+            Timpris = timpris;
+            Uthyrd = uthyrd;
         }
 
         public virtual bool KanSäljas()
         {
-            return !uthyrd;
+            return !Uthyrd;
+        }
+
+        public virtual void VisaInfo()
+        {
+            Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Name}, Timpris: {Timpris}, Uthyrd: {Uthyrd}");
         }
     }
 }

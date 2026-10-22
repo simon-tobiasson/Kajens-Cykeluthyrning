@@ -2,21 +2,21 @@
 {
     public class Cykel : Fordon
     {
-        public Cykel(int CykelNummer, string Name, int Timpris, bool Uthyrd) : base(CykelNummer, Name, Timpris, Uthyrd)
+        public Cykel(int cykelNummer, string name, int timpris, bool uthyrd) : base(cykelNummer, name, timpris, uthyrd)
         {
         }
 
         public override bool KanSäljas()
         {
-            if (!uthyrd)
+            if (!Uthyrd)
             {
-                Console.WriteLine($"{name} kan säljas.");
-                return !uthyrd;
+                Console.WriteLine($"{Name} kan säljas.");
+                return !Uthyrd;
             }
 
             else
             {
-                Console.WriteLine($"{name} kan inte säljas eftersom den är uthyrd.");
+                Console.WriteLine($"{Name} kan inte säljas eftersom den är uthyrd.");
                 return true;
             }
         }

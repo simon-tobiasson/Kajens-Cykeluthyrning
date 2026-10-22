@@ -2,29 +2,46 @@
 {
     public class Elcykel : Fordon
     {
-        private int batteriNivå;
+        private int BatteriNivå { get; set; }
 
-        public Elcykel(int CykelNummer, string Name, int Timpris, bool Uthyrd, int BatteriNivå) : base(CykelNummer, Name, Timpris, Uthyrd)
+        public Elcykel(int cykelNummer, string name, int timpris, bool uthyrd, int batteriNivå) : base(cykelNummer, name, timpris, uthyrd)
         {
-            batteriNivå = BatteriNivå;
+            BatteriNivå = BatteriNivå;
         }
 
         public override bool KanSäljas()
         {
-            if (!uthyrd && batteriNivå > 30)
+            if (!Uthyrd && BatteriNivå > 30)
             {
-                Console.WriteLine($"{name} kan säljas.");
-                return !uthyrd;
+                Console.WriteLine($"{Name} kan säljas.");
+                return !Uthyrd;
             }
-            else if (uthyrd)
+            else if (Uthyrd)
             {
-                Console.WriteLine($"{name} kan inte säljas eftersom den är uthyrd.");
+                Console.WriteLine($"{Name} kan inte säljas eftersom den är uthyrd.");
                 return true;
             }
             else
             {
-                Console.WriteLine($"{name} kan inte säljas eftersom batterinivån är för låg.");
+                Console.WriteLine($"{Name} {CykelNummer} kan inte säljas eftersom batterinivån är för låg ({BatteriNivå}%). Ladda batteriet först.");
                 return true;
+            }
+        }
+
+        public override void VisaInfo()
+        {
+            Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Name}, Timpris: {Timpris}, Uthyrd: {Uthyrd}, Batterinivå: {BatteriNivå}%");
+        }   
+
+        public void LaddaBatteri()
+        {
+            if (BatteriNivå  < 100)
+            {
+                Console.WriteLine("Batteriet laddar."); ;
+            }
+            else 
+            { 
+                Console.WriteLine($"Batteriet är redan fulladdat"); 
             }
         }
     }
