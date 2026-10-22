@@ -32,7 +32,7 @@
             return CykelNummer;
         }
 
-        public bool CykelNummerBool(int cykelNummer) // Samma som metoden ovan falls med datatypen bool. Används också i Uthyrning - VäljFordon (Ändrar namnet så det är CykelNummerBool istället för att göra det enklare att se.)
+        public bool CykelNummerBool(int cykelNummer) // Samma som metoden ovan falls med datatypen bool. Används också i Uthyrning - VäljFordon (Ändrar namnet så det är CykelNummerBool istället för att göra det enklare att förstå.)
         {
             return CykelNummer == cykelNummer;
         }

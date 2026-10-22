@@ -13,9 +13,9 @@
             ärMedlem = ÄrMedlem;
         }
 
-        public void VisaKundInfo()
+        public void VisaKundInfo() // Visar kund info, inte mer än det. 
         {
-            string statusMedlem = ärMedlem ? "ja" : "nej";
+            string statusMedlem = ärMedlem ? "ja" : "nej"; // Om ärMedlem är true skriver "ja" ut, om den är false skriver den ut "nej". 
 
             Console.WriteLine($"Kundnamn: {kundName}");
             Console.WriteLine($"Kundålder: {kundÅlder}");

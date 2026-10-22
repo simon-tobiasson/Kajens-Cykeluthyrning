@@ -1,16 +1,16 @@
 ﻿
 namespace Kajens_CykelUthyrning
 {
-    public class Elcykel : Fordon
+    public class Elcykel : Fordon // Subklass
     {
-        private int BatteriNivå { get; set; }
+        private int BatteriNivå { get; set; } // Utökar klassen med BatteriNivå då den andra subklassen inte har det. 
 
-        public Elcykel(int cykelNummer, string typ, int timpris, bool uthyrd, int batteriNivå) : base(cykelNummer, typ, timpris, uthyrd)
+        public Elcykel(int cykelNummer, string typ, int timpris, bool uthyrd, int batteriNivå) : base(cykelNummer, typ, timpris, uthyrd) 
         {
             BatteriNivå = batteriNivå;
         }
 
-        public override bool KanHyrasUt()
+        public override bool KanHyrasUt() // Polymorferar metoden från basklassen till att ge felmeddelande till olika situationer.
         {
             if (!Uthyrd && BatteriNivå > 30)
             {
@@ -29,13 +29,13 @@ namespace Kajens_CykelUthyrning
             }
         }
 
-        public override void VisaInfo()
+        public override void VisaInfo() // Polymorferar metoden igen från basklassen, lägger till BatteriNivå i utskriften.
         {
             string status = Uthyrd ? "uthyrd" : "ledig";
             Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Typ}, Timpris: {Timpris}, Status: {status}, Batterinivå: {BatteriNivå}%");
         }
 
-        public void LaddaBatteri()
+        public void LaddaBatteri() // Metoden används inte än, kommer används den senare i alternativ 5 (ladda).
         {
             if (BatteriNivå < 100)
             {
@@ -47,7 +47,7 @@ namespace Kajens_CykelUthyrning
             }
         }
 
-        public int GetBatteriNivå()
+        public int GetBatteriNivå() // Gör det möjligt för andra klasser att läsa in den privata egenskapen. Förtillfället läses den bara in i Uthyrning - KollaTimmar.
         {
             return BatteriNivå;
         }
