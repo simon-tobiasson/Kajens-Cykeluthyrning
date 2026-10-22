@@ -1,10 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Kajens_CykelUthyrning
+﻿namespace Kajens_CykelUthyrning
 {
-    internal class Fordon
+    public class Fordon
     {
+        protected int cykelNummer;
+        protected int timpris;
+        protected bool uthyrd;
+
+        public Fordon(int CykelNummer, int Timpris, bool Uthyrd)
+        {
+            cykelNummer = CykelNummer;
+            timpris = Timpris;
+            uthyrd = Uthyrd;
+        }
+
+        public virtual bool KanSäljas()
+        {
+            return !uthyrd;
+        }
     }
 }
