@@ -3,12 +3,14 @@
     public class Fordon
     {
         protected int cykelNummer;
+        protected string name;
         protected int timpris;
         protected bool uthyrd;
 
-        public Fordon(int CykelNummer, int Timpris, bool Uthyrd)
+        public Fordon(int CykelNummer, string Name, int Timpris, bool Uthyrd)
         {
             cykelNummer = CykelNummer;
+            name = Name;
             timpris = Timpris;
             uthyrd = Uthyrd;
         }
