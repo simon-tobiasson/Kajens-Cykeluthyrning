@@ -15,7 +15,7 @@
 
         public void VisaKundInfo()
         {
-            string statusMedlem = ärMedlem ? "nej" : "ja";
+            string statusMedlem = ärMedlem ? "ja" : "nej";
 
             Console.WriteLine($"Kundnamn: {kundName}");
             Console.WriteLine($"Kundålder: {kundÅlder}");

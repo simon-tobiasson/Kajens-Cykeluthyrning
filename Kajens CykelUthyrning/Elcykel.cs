@@ -14,12 +14,12 @@ namespace Kajens_CykelUthyrning
         {
             if (!Uthyrd && BatteriNivå > 30)
             {
-                Console.WriteLine($"{Typ} kan säljas.");
+                Console.WriteLine($"{Typ} {CykelNummer} hyrs ut.");
                 return !Uthyrd;
             }
             else if (Uthyrd)
             {
-                Console.WriteLine($"{Typ} kan inte säljas eftersom den är uthyrd.");
+                Console.WriteLine($"{Typ} {CykelNummer} kan inte säljas eftersom den är uthyrd.");
                 return true;
             }
             else
@@ -37,7 +37,7 @@ namespace Kajens_CykelUthyrning
 
         public void LaddaBatteri()
         {
-            if (BatteriNivå  < 100)
+            if (BatteriNivå < 100)
             {
                 Console.WriteLine("Batteriet laddar."); ;
             }
@@ -45,6 +45,11 @@ namespace Kajens_CykelUthyrning
             { 
                 Console.WriteLine($"Batteriet är redan fulladdat"); 
             }
+        }
+
+        public int GetBatteriNivå()
+        {
+            return BatteriNivå;
         }
     }
 }

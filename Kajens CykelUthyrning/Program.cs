@@ -10,6 +10,7 @@ List<Fordon> fordonLista = new List<Fordon>()
 
 List<Kund> kundLista = new List<Kund>();
 
+var uthyrning = new Uthyrning();
 
 while (true)
 {
@@ -47,6 +48,13 @@ while (true)
         Kund nyKund = new Kund(kundNamn, kundÅlder, ärMedlem);
 
         nyKund.VisaKundInfo();
+    }
+
+    else if (val == 3)
+    {
+        uthyrning.VäljFordon(fordonLista);
+        //uthyrning.KollaTimmar(fordonLista);
+
     }
 
     else if (val == 6)
