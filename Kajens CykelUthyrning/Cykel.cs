@@ -10,15 +10,20 @@
         {
             if (!Uthyrd)
             {
-                Console.WriteLine($"{Name} kan säljas.");
+                Console.WriteLine($"{Typ} kan säljas.");
                 return !Uthyrd;
             }
 
             else
             {
-                Console.WriteLine($"{Name} kan inte säljas eftersom den är uthyrd.");
+                Console.WriteLine($"{Typ} kan inte säljas eftersom den är uthyrd.");
                 return true;
             }
+        }
+
+        public override void VisaInfo()
+        {
+            Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Typ}, Timpris: {Timpris}, Uthyrd: {Uthyrd}");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace Kajens_CykelUthyrning
+﻿
+namespace Kajens_CykelUthyrning
 {
     public class Elcykel : Fordon
     {
@@ -6,32 +7,32 @@
 
         public Elcykel(int cykelNummer, string name, int timpris, bool uthyrd, int batteriNivå) : base(cykelNummer, name, timpris, uthyrd)
         {
-            BatteriNivå = BatteriNivå;
+            BatteriNivå = batteriNivå;
         }
 
         public override bool KanSäljas()
         {
             if (!Uthyrd && BatteriNivå > 30)
             {
-                Console.WriteLine($"{Name} kan säljas.");
+                Console.WriteLine($"{Typ} kan säljas.");
                 return !Uthyrd;
             }
             else if (Uthyrd)
             {
-                Console.WriteLine($"{Name} kan inte säljas eftersom den är uthyrd.");
+                Console.WriteLine($"{Typ} kan inte säljas eftersom den är uthyrd.");
                 return true;
             }
             else
             {
-                Console.WriteLine($"{Name} {CykelNummer} kan inte säljas eftersom batterinivån är för låg ({BatteriNivå}%). Ladda batteriet först.");
+                Console.WriteLine($"{Typ} {CykelNummer} kan inte säljas eftersom batterinivån är för låg ({BatteriNivå}%). Ladda batteriet först.");
                 return true;
             }
         }
 
         public override void VisaInfo()
         {
-            Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Name}, Timpris: {Timpris}, Uthyrd: {Uthyrd}, Batterinivå: {BatteriNivå}%");
-        }   
+            Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Typ}, Timpris: {Timpris}, Uthyrd: {Uthyrd}, Batterinivå: {BatteriNivå}%");
+        }
 
         public void LaddaBatteri()
         {

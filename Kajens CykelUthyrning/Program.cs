@@ -1,9 +1,15 @@
-﻿using System.Text.Json;
-using Kajens_CykelUthyrning;
+﻿using Kajens_CykelUthyrning;
+using System.Text.Json;
+using System.Xml.Linq;
 
 string jsonFile = File.ReadAllText("Cyklar.json");
+Console.WriteLine("JSON content:");
+Console.WriteLine(jsonFile);
 
 List<Fordon> fordonLista = JsonSerializer.Deserialize<List<Fordon>>(jsonFile);
+
+var cykelLista = fordonLista.Where(x => x.Name == "Cykel").Cast<Cykel>();
+var elcykelLista = fordonLista.Where(x => x.Name == "Elcykel").Cast<Elcykel>();
 
 while (true)
 {
@@ -21,10 +27,14 @@ while (true)
 
     if (val == 1)
     {
-        foreach (var fordon in fordonLista)
+        foreach (var cykel in cykelLista)
         {
-            fordon.VisaInfo();
+            cykel.VisaInfo();
+        }
 
+        foreach (var elcykel in elcykelLista)
+        {
+           elcykel.VisaInfo();
         }
     }
 
