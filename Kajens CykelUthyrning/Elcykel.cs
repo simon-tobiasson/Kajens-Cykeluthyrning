@@ -5,7 +5,7 @@ namespace Kajens_CykelUthyrning
     {
         private int BatteriNivå { get; set; }
 
-        public Elcykel(int cykelNummer, string name, int timpris, bool uthyrd, int batteriNivå) : base(cykelNummer, name, timpris, uthyrd)
+        public Elcykel(int cykelNummer, string typ, int timpris, bool uthyrd, int batteriNivå) : base(cykelNummer, typ, timpris, uthyrd)
         {
             BatteriNivå = batteriNivå;
         }
@@ -31,7 +31,8 @@ namespace Kajens_CykelUthyrning
 
         public override void VisaInfo()
         {
-            Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Typ}, Timpris: {Timpris}, Uthyrd: {Uthyrd}, Batterinivå: {BatteriNivå}%");
+            string status = Uthyrd ? "uthyrd" : "ledig";
+            Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Typ}, Timpris: {Timpris}, Status: {status}, Batterinivå: {BatteriNivå}%");
         }
 
         public void LaddaBatteri()

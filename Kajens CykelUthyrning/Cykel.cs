@@ -2,7 +2,7 @@
 {
     public class Cykel : Fordon
     {
-        public Cykel(int cykelNummer, string name, int timpris, bool uthyrd) : base(cykelNummer, name, timpris, uthyrd)
+        public Cykel(int cykelNummer, string typ, int timpris, bool uthyrd) : base(cykelNummer, typ, timpris, uthyrd)
         {
         }
 
@@ -19,11 +19,6 @@
                 Console.WriteLine($"{Typ} kan inte säljas eftersom den är uthyrd.");
                 return true;
             }
-        }
-
-        public override void VisaInfo()
-        {
-            Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Typ}, Timpris: {Timpris}, Uthyrd: {Uthyrd}");
-        }
+        }        
     }
 }
