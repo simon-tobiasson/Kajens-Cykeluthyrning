@@ -10,7 +10,7 @@ namespace Kajens_CykelUthyrning
             BatteriNivå = batteriNivå;
         }
 
-        public override bool KanSäljas()
+        public override bool KanHyrasUt()
         {
             if (!Uthyrd && BatteriNivå > 30)
             {
@@ -19,12 +19,12 @@ namespace Kajens_CykelUthyrning
             }
             else if (Uthyrd)
             {
-                Console.WriteLine($"{Typ} {CykelNummer} kan inte säljas eftersom den är uthyrd.");
+                Console.WriteLine($"{Typ} {CykelNummer} kan inte hyras ut eftersom den är uthyrd.");
                 return true;
             }
             else
             {
-                Console.WriteLine($"{Typ} {CykelNummer} kan inte säljas eftersom batterinivån är för låg ({BatteriNivå}%). Ladda batteriet först.");
+                Console.WriteLine($"{Typ} {CykelNummer} kan inte hyras ut eftersom batterinivån är för låg ({BatteriNivå}%). Ladda batteriet först.");
                 return true;
             }
         }

@@ -6,7 +6,7 @@
         {
         }
 
-        public override bool KanSäljas()
+        public override bool KanHyrasUt()
         {
             if (!Uthyrd)
             {
@@ -16,7 +16,7 @@
 
             else
             {
-                Console.WriteLine($"{Typ} {CykelNummer} kan inte säljas eftersom den är uthyrd.");
+                Console.WriteLine($"{Typ} {CykelNummer} kan inte hyras ut eftersom den är uthyrd.");
                 return true;
             }
         }        

@@ -8,7 +8,7 @@
         protected int Timpris { get; set; }
         protected bool Uthyrd { get; set; }
 
-        public Fordon(int cykelNummer, string typ, int timpris, bool uthyrd)
+        public Fordon(int cykelNummer, string typ, int timpris, bool uthyrd) // Konstruktorn för basklassen
         {
             CykelNummer = cykelNummer;
             Typ = typ;
@@ -16,18 +16,23 @@
             Uthyrd = uthyrd;
         }
 
-        public virtual bool KanSäljas()
+        public virtual bool KanHyrasUt() // Bas metoden för om ett fordon kan hyras ut. (Ändrar namnet från KanSäljas till KanHyrasUt.)
         {
             return !Uthyrd;
         }
 
-        public virtual void VisaInfo()
+        public virtual void VisaInfo() // Bas metoden för alla fordon infon.
         {
             string status = Uthyrd ? "uthyrd" : "ledig";
             Console.WriteLine($"Cykelnummer: {CykelNummer}, Namn: {Typ}, Timpris: {Timpris}, Status: {status}");
         }
 
-        public bool CykelNummerMatchar(int cykelNummer)
+        public int CykelNummerInt() // Metod så att andra klasser kan hämta "protected" CykelNummer i datatypen int. Används i Uthyrning - VäljFordon
+        {
+            return CykelNummer;
+        }
+
+        public bool CykelNummerBool(int cykelNummer) // Samma som metoden ovan falls med datatypen bool. Används också i Uthyrning - VäljFordon (Ändrar namnet så det är CykelNummerBool istället för att göra det enklare att se.)
         {
             return CykelNummer == cykelNummer;
         }
