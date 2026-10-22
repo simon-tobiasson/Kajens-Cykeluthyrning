@@ -8,7 +8,7 @@ List<Fordon> fordonLista = new List<Fordon>()
     new Elcykel(4, "Elcykel", 70, false, 20)
 };
 
-
+List<Kund> kundLista = new List<Kund>();
 
 
 while (true)
@@ -31,6 +31,22 @@ while (true)
         {
             fordon.VisaInfo();
         }
+    }
+
+    else if (val == 2)
+    {
+        Console.Write("Ange kundens namn: ");
+        string kundNamn = Console.ReadLine();
+
+        Console.Write("Ange kundens ålder: ");
+        int kundÅlder = int.Parse(Console.ReadLine());
+
+        Console.Write("Är kunden medlem? (ja/nej): ");
+        bool ärMedlem = Console.ReadLine().ToLower() == "ja";
+
+        Kund nyKund = new Kund(kundNamn, kundÅlder, ärMedlem);
+
+        nyKund.VisaKundInfo();
     }
 
     else if (val == 6)

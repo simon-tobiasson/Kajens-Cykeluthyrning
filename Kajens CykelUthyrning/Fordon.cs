@@ -3,10 +3,10 @@
     public class Fordon
     {
 
-        public int CykelNummer { get; set; }
-        public string Typ { get; set; }
-        public int Timpris { get; set; }
-        public bool Uthyrd { get; set; }   
+        protected int CykelNummer { get; set; }
+        protected string Typ { get; set; }
+        protected int Timpris { get; set; }
+        protected bool Uthyrd { get; set; }   
 
         public Fordon(int cykelNummer, string typ, int timpris, bool uthyrd)
         {
