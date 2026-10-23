@@ -14,16 +14,16 @@ namespace Kajens_CykelUthyrning
             AntalUthyrdaTimmar = antalUthyrdaTimmar;
         }
         
-        public void VäljFordon(List<Fordon> fordonLista)   // Metod som låter användaren välja ett fordon från listan med att skriva in cykelnumret. Om fordonet kan säljas läggs det till i uthyrningslistan.
+        public void VäljFordon(List<Fordon> fordonLista, int kundÅlder)   // Metod som låter användaren välja ett fordon från listan med att skriva in cykelnumret. Om fordonet kan säljas läggs det till i uthyrningslistan.
         {
-            int minNummer = fordonLista.Min(f => f.CykelNummerInt()); // Hämtar det minsta cykelnumret från fordon listan.
-            int maxNummer = fordonLista.Max(f => f.CykelNummerInt()); // Hämtar det högsta cykelnumret från samma lista.
+            int minNummer = fordonLista.Min(f => f.GetCykelNummerInt()); // Hämtar det minsta cykelnumret från fordon listan.
+            int maxNummer = fordonLista.Max(f => f.GetCykelNummerInt()); // Hämtar det högsta cykelnumret från samma lista.
 
             Console.WriteLine("Cyklar att välja mellan: ");
             
             foreach (Fordon item in fordonLista) 
             {
-                item.VisaInfo();
+                item.VisaInfo(kundÅlder);
             }
 
             Console.Write("Ange cykelnummer: ");            
@@ -35,19 +35,26 @@ namespace Kajens_CykelUthyrning
                 return;
             }
             
-            Fordon? fordon = fordonLista.FirstOrDefault(f => f.CykelNummerBool(cykelNummerVal)); // Tar och kollar igenom fordonListan om användarens val av cykelnummer finns med
+            Fordon? fordon = fordonLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal)); // Tar och kollar igenom fordonListan om användarens val av cykelnummer finns med
 
             if(fordon == null) // Om svaret inte finns med i listan räknas det som null och då kommer detta fel meddelandet istället.
             {
                 Console.WriteLine($"Fordon med cykelnummer {cykelNummerVal} finns inte i listan. Välj ett nummer mellan numrerna i listan, {minNummer} och {maxNummer}.");
                 return;
-            }        
+            }
+
+
+            if(kundÅlder >= 15 && kundÅlder <= 17 && fordon is Elcykel) // Villkoret skriver ut felmeddelandet och går tillbaka om användaren försöker hyra en elcykel även om kunden är 15-17 år.
+            {
+                Console.WriteLine("En kund mellan 15-17 år kan inte hyra en elcykel.");
+                return;
+            }  
             
             
             if (KollaTimmar(fordon) == false) // Anropar KollaTimmar metoden från längre ner i Uthyrning klassen.
             {            
                 return;
-            }     
+            }
    
 
             if (fordon.KanHyrasUt()) // Anropar metoden från bas klassen Fordon och borde lägga till valet i uthyrnings listan om villkoren möts. Jag har inte testat varje svar ännu så kan inte säga exakt.
@@ -55,8 +62,7 @@ namespace Kajens_CykelUthyrning
                 fordonUthyrningLista.Add(fordon);             
                 return;
             }      
-            
-            
+                        
             return;
         }
 
@@ -68,7 +74,7 @@ namespace Kajens_CykelUthyrning
                 Console.Write("Ange timmar: ");
                 int antalUthyrdaTimmar = int.Parse(Console.ReadLine());
 
-                if (antalUthyrdaTimmar > elcykel.GetBatteriNivå() / 10) 
+                if (antalUthyrdaTimmar > elcykel.GetBatteriNivåInt() / 10) 
                 {
                     Console.WriteLine("Kunden kan inte hyra elcykeln längre tid än dess batteri nivå.");
                     return false;

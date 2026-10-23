@@ -32,7 +32,7 @@
         {
             if (kundÅlder < 15)
             {
-                Console.WriteLine("Kunden är får inte hyra en cykel eftersom hen är under 15 år. Programmet avslutas."); // Om kunden är 15 år anges ett fel meddelande och sen stängs programmet ner med en gång.
+                Console.WriteLine("Kunden får inte hyra en cykel eftersom hen är under 15 år. Programmet avslutas."); // Om kunden är 15 år anges ett fel meddelande och sen stängs programmet ner med en gång.
                 Environment.Exit(0);
             }
 
@@ -45,6 +45,11 @@
             {
                 return;
             }
+        }
+
+        public int GetKundÅlderInt()
+        {
+            return kundÅlder;
         }
 
         

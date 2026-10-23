@@ -29,9 +29,9 @@ while (true) // While loopen
 
     if (val == 1)
     {
-        foreach (Fordon fordon in fordonLista) // Itererar igenom fordonLista och skriver ut informationen.
+        foreach (Fordon fordon in fordonLista) // Itererar igenom fordonLista och skriver ut informationen. - La till kund.GetKundÅlderInt() så att int kundÅlder sätts som det inmatade numret.
         {
-            fordon.VisaInfo();
+            fordon.VisaInfo(kund.GetKundÅlderInt());
         }
     }
 
@@ -42,9 +42,9 @@ while (true) // While loopen
         kund.VisaKundInfo();
     }
 
-    else if (val == 3) // Anropar VäljFordon funktionen från Uthyrning.cs
+    else if (val == 3) // Anropar VäljFordon funktionen från Uthyrning.cs - La till kund.GetKundÅlderInt() så att int kundÅlder sätts som det inmatade numret.
     {
-        uthyrning.VäljFordon(fordonLista);         
+        uthyrning.VäljFordon(fordonLista, kund.GetKundÅlderInt()); 
     }
 
     else if (val == 6) // Avslutar programmet

@@ -20,21 +20,20 @@
         {
             return !Uthyrd;
         }
-
         
 
-        public virtual void VisaInfo() // Bas metoden för alla fordon infon.
+        public virtual void VisaInfo(int kundÅlder) // Bas metoden för alla fordon infon. La till int kundÅlder i parametern så funktion kan läsa den informationen.
         {
             string status = Uthyrd ? "uthyrd" : "ledig";
             Console.WriteLine($"Cykelnummer: {CykelNummer}, Typ: {Typ}, Timpris: {Timpris}, Status: {status}");
         }
 
-        public int CykelNummerInt() // Metod så att andra klasser kan hämta "protected" CykelNummer i datatypen int. Används i Uthyrning - VäljFordon
+        public int GetCykelNummerInt() // Metod så att andra klasser kan hämta "protected" CykelNummer i datatypen int. Används i Uthyrning - VäljFordon
         {
             return CykelNummer;
         }
 
-        public bool CykelNummerBool(int cykelNummer) // Samma som metoden ovan falls med datatypen bool. Används också i Uthyrning - VäljFordon (Ändrar namnet så det är CykelNummerBool istället för att göra det enklare att förstå.)
+        public bool GetCykelNummerBool(int cykelNummer) // Samma som metoden ovan falls med datatypen bool. Används också i Uthyrning - VäljFordon (Ändrar namnet så det är CykelNummerBool istället för att göra det enklare att förstå.)
         {
             return CykelNummer == cykelNummer;
         }
