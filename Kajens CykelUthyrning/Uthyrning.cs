@@ -7,14 +7,24 @@ namespace Kajens_CykelUthyrning
 
         private List<Fordon> fordonUthyrningLista = new List<Fordon>();  // En lista som håller reda på de fordon som blir uthyrda
 
-        private int antalUthyrdaTimmar { get; set; }
+        private int AntalUthyrdaTimmar { get; set; }
 
-        
+        public Uthyrning(int antalUthyrdaTimmar)
+        {
+            AntalUthyrdaTimmar = antalUthyrdaTimmar;
+        }
         
         public void VäljFordon(List<Fordon> fordonLista)   // Metod som låter användaren välja ett fordon från listan med att skriva in cykelnumret. Om fordonet kan säljas läggs det till i uthyrningslistan.
         {
             int minNummer = fordonLista.Min(f => f.CykelNummerInt()); // Hämtar det minsta cykelnumret från fordon listan.
             int maxNummer = fordonLista.Max(f => f.CykelNummerInt()); // Hämtar det högsta cykelnumret från samma lista.
+
+            Console.WriteLine("Cyklar att välja mellan: ");
+            
+            foreach (Fordon item in fordonLista) 
+            {
+                item.VisaInfo();
+            }
 
             Console.Write("Ange cykelnummer: ");            
             
@@ -31,36 +41,46 @@ namespace Kajens_CykelUthyrning
             {
                 Console.WriteLine($"Fordon med cykelnummer {cykelNummerVal} finns inte i listan. Välj ett nummer mellan numrerna i listan, {minNummer} och {maxNummer}.");
                 return;
-            }            
-
-            if(KollaTimmar(fordonLista) == false) // Anropar KollaTimmar metoden från längre ner i Uthyrning klassen.
-            {
-                return;
-            }
+            }        
             
+            
+            if (KollaTimmar(fordon) == false) // Anropar KollaTimmar metoden från längre ner i Uthyrning klassen.
+            {            
+                return;
+            }     
+   
 
             if (fordon.KanHyrasUt()) // Anropar metoden från bas klassen Fordon och borde lägga till valet i uthyrnings listan om villkoren möts. Jag har inte testat varje svar ännu så kan inte säga exakt.
-            {
-                fordonUthyrningLista.Add(fordon);
+            {                
+                fordonUthyrningLista.Add(fordon);             
                 return;
-            }
+            }      
+            
+            
             return;
-
         }
 
-        public bool KollaTimmar(List<Fordon> fordonLista) // Metod för att kolla timmar och ger ett fel meddelande om svaret på hur många timmar kunden ska hyra ut en cykel överskrider elcykelarnas batterikapacitet.
+        public bool KollaTimmar(Fordon cykelNummerVal) // Metoden kollar hur många timmar cykeln ska hyras ut. 
         {
-            Console.Write("Ange timmar: ");
-            int antalUthyrdaTimmar = int.Parse(Console.ReadLine());
 
-            var elcykel = fordonLista.OfType<Elcykel>().FirstOrDefault(); // Denna kodlinjen kommer jag att ändra på imorgon. Just nu kollar den FirstOrDefault, det vill jag inte, jag vill att den ska kolla vilket cykelNummer som personalen/användaren har valt, och om det numret matchar ska resten av koden köras.
-
-            if (antalUthyrdaTimmar > elcykel.GetBatteriNivå() / 10) // Kollar hur många timmar kunden vill hyra ut en cykel och om hen vill hyra ut elcykeln längre tid än dess batterinivå, då skickas felmeddelandet.
+            if (cykelNummerVal is Elcykel elcykel && cykelNummerVal.ÄrUthyrd() == false) // Om cykeln är ledig och är en elcykel ska inte användaren kunna skriva fler timmar än vad batteri nivån är. 
             {
-                Console.WriteLine("Kunden kan inte hyra elcykeln längre tid än dess batteri nivå.");
-                return false;
+                Console.Write("Ange timmar: ");
+                int antalUthyrdaTimmar = int.Parse(Console.ReadLine());
+
+                if (antalUthyrdaTimmar > elcykel.GetBatteriNivå() / 10) 
+                {
+                    Console.WriteLine("Kunden kan inte hyra elcykeln längre tid än dess batteri nivå.");
+                    return false;
+                }               
             }
-            return true;
+
+            else if (cykelNummerVal is Cykel && cykelNummerVal.ÄrUthyrd() == false) // Om cykeln är ledig och är en vanlig cykel så tar den emot antal timmar.
+            {
+                Console.Write("Ange timmar: ");
+                int antalUthyrdaTimmar = int.Parse(Console.ReadLine());
+            }
+            return true;            
         }
     }
 }

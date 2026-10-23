@@ -17,7 +17,7 @@
             else
             {
                 Console.WriteLine($"{Typ} {CykelNummer} kan inte hyras ut eftersom den är uthyrd.");
-                return true;
+                return false;
             }
         }        
     }

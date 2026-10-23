@@ -10,7 +10,8 @@ List<Fordon> fordonLista = new List<Fordon>()  // Fordon listan, försökte gör
 
 List<Kund> kundLista = new List<Kund>(); // Kund listan
 
-var uthyrning = new Uthyrning(); // varje gång programmet körs, ny uthyrning.
+var uthyrning = new Uthyrning(0); // varje gång programmet körs, ny uthyrning.
+var kund = new Kund("", 0, false); // varje gång programmet körs, ny kund.
 
 while (true) // While loopen
 {
@@ -36,18 +37,9 @@ while (true) // While loopen
 
     else if (val == 2) // Tar in den inmatade informationen om kunden och lagrar den i listan, sen skriver den ut informationen. Här kommer jag nog fixa iordning koden så det ser renare ut, flytta den till en metod i kund klassen och anropa den. Behöver ändå en metod som kollar åldern och avslutar programmet om kunden är under 15 år.
     {
-        Console.Write("Ange kundens namn: ");
-        string kundNamn = Console.ReadLine();
+        kund.RegistreraKund();
 
-        Console.Write("Ange kundens ålder: ");
-        int kundÅlder = int.Parse(Console.ReadLine());
-
-        Console.Write("Är kunden medlem? (ja/nej): ");
-        bool ärMedlem = Console.ReadLine().ToLower() == "ja";
-
-        Kund nyKund = new Kund(kundNamn, kundÅlder, ärMedlem);
-
-        nyKund.VisaKundInfo();
+        kund.VisaKundInfo();
     }
 
     else if (val == 3) // Anropar VäljFordon funktionen från Uthyrning.cs
