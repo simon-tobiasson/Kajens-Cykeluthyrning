@@ -35,31 +35,31 @@ namespace Kajens_CykelUthyrning
                 return;
             }
             
-            Fordon? fordon = fordonLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal)); // Tar och kollar igenom fordonListan om användarens val av cykelnummer finns med
+            Fordon? cykelNummer = fordonLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal)); // Tar och kollar igenom fordonListan om användarens val av cykelnummer finns med
 
-            if(fordon == null) // Om svaret inte finns med i listan räknas det som null och då kommer detta fel meddelandet istället.
+            if(cykelNummer == null) // Om svaret inte finns med i listan räknas det som null och då kommer detta fel meddelandet istället.
             {
                 Console.WriteLine($"Fordon med cykelnummer {cykelNummerVal} finns inte i listan. Välj ett nummer mellan numrerna i listan, {minNummer} och {maxNummer}.");
                 return;
             }
 
 
-            if(kundÅlder >= 15 && kundÅlder <= 17 && fordon is Elcykel) // Villkoret skriver ut felmeddelandet och går tillbaka om användaren försöker hyra en elcykel även om kunden är 15-17 år.
+            if(kundÅlder >= 15 && kundÅlder <= 17 && cykelNummer is Elcykel) // Villkoret skriver ut felmeddelandet och går tillbaka om användaren försöker hyra en elcykel även om kunden är 15-17 år.
             {
                 Console.WriteLine("En kund mellan 15-17 år kan inte hyra en elcykel.");
                 return;
             }  
             
             
-            if (KollaTimmar(fordon) == false) // Anropar KollaTimmar metoden från längre ner i Uthyrning klassen.
+            if (KollaTimmar(cykelNummer) == false) // Anropar KollaTimmar metoden från längre ner i Uthyrning klassen.
             {            
                 return;
             }
    
 
-            if (fordon.KanHyrasUt()) // Anropar metoden från bas klassen Fordon och borde lägga till valet i uthyrnings listan om villkoren möts. Jag har inte testat varje svar ännu så kan inte säga exakt.
+            if (cykelNummer.KanHyrasUt()) // Anropar metoden från bas klassen Fordon och borde lägga till valet i uthyrnings listan om villkoren möts. Jag har inte testat varje svar ännu så kan inte säga exakt.
             {                
-                fordonUthyrningLista.Add(fordon);             
+                fordonUthyrningLista.Add(cykelNummer);             
                 return;
             }      
                         

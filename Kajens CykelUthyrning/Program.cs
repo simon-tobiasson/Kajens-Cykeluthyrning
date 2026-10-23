@@ -25,6 +25,7 @@ while (true) // While loopen
     Console.WriteLine("6. Avsluta");
 
     Console.Write("Välj ett alternativ: ");
+
     int val = int.Parse(Console.ReadLine());
 
     if (val == 1)
