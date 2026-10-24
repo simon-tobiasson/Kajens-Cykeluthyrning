@@ -2,13 +2,13 @@
 {
     public class Kund
     {
-        private string kundName { get; set; }
+        private string kundNamn { get; set; }
         private int kundÅlder { get; set; }
         private bool ärMedlem { get; set; }
 
-        public Kund(string KundName, int KundÅlder, bool ÄrMedlem)
+        public Kund(string KundNamn, int KundÅlder, bool ÄrMedlem)
         {
-            kundName = KundName;
+            kundNamn = KundNamn;
             kundÅlder = KundÅlder;
             ärMedlem = ÄrMedlem;
         }
@@ -16,7 +16,7 @@
         public void RegistreraKund() //Flyttade kod blocket från val 2 hit till Kund.cs. Metoden anropas i val 2.
         {
             Console.Write("Ange kundens namn: ");
-            kundName = Console.ReadLine();
+            kundNamn = Console.ReadLine();
 
             Console.Write("Ange kundens ålder: ");
             kundÅlder = int.Parse(Console.ReadLine());
@@ -52,12 +52,17 @@
             return kundÅlder;
         }
 
+        public string GetKundNamn()
+        {
+            return kundNamn;
+        }
+
         
         public void VisaKundInfo() // Visar kund info, inte mer än det. 
         {
             string statusMedlem = ärMedlem ? "ja" : "nej"; // Om ärMedlem är true skriver "ja" ut, om den är false skriver den ut "nej". 
 
-            Console.WriteLine($"Kundnamn: {kundName}");
+            Console.WriteLine($"Kundnamn: {kundNamn}");
             Console.WriteLine($"Kundålder: {kundÅlder}");
             Console.WriteLine($"Är medlem: {statusMedlem}");
         }

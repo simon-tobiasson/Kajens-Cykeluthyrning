@@ -14,7 +14,7 @@ namespace Kajens_CykelUthyrning
             AntalUthyrdaTimmar = antalUthyrdaTimmar;
         }
         
-        public void VäljFordon(List<Fordon> fordonLista, int kundÅlder)   // Metod som låter användaren välja ett fordon från listan med att skriva in cykelnumret. Om fordonet kan säljas läggs det till i uthyrningslistan.
+        public void VäljFordon(List<Fordon> fordonLista, string kundNamn, int kundÅlder)   // Metod som låter användaren välja ett fordon från listan med att skriva in cykelnumret. Om fordonet kan säljas läggs det till i uthyrningslistan.
         {
             int minNummer = fordonLista.Min(f => f.GetCykelNummerInt()); // Hämtar det minsta cykelnumret från fordon listan.
             int maxNummer = fordonLista.Max(f => f.GetCykelNummerInt()); // Hämtar det högsta cykelnumret från samma lista.
@@ -26,8 +26,9 @@ namespace Kajens_CykelUthyrning
                 item.VisaInfo(kundÅlder);
             }
 
-            Console.Write("Ange cykelnummer: ");            
-            
+            Console.WriteLine($"Kund: {kundNamn}");
+
+            Console.Write("Ange cykelnummer: ");
 
             if (!int.TryParse(Console.ReadLine(), out int cykelNummerVal)) // Jag fixade det. Nu fungerar det som jag ville! Förhoppningsvis. Har inte tid att felsöka mer idag (kl 21:07). (Och det som detta kodblocket gör är att kolla om svaret är ett heltal. Om det inte är det slår fel meddelandet in.
             {
@@ -87,6 +88,6 @@ namespace Kajens_CykelUthyrning
                 int antalUthyrdaTimmar = int.Parse(Console.ReadLine());
             }
             return true;            
-        }
+        }        
     }
 }

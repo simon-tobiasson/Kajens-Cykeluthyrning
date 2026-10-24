@@ -45,7 +45,7 @@ while (true) // While loopen
 
     else if (val == 3) // Anropar VäljFordon funktionen från Uthyrning.cs - La till kund.GetKundÅlderInt() så att int kundÅlder sätts som det inmatade numret.
     {
-        uthyrning.VäljFordon(fordonLista, kund.GetKundÅlderInt()); 
+        uthyrning.VäljFordon(fordonLista, kund.GetKundNamn(), kund.GetKundÅlderInt()); 
     }
 
     else if (val == 6) // Avslutar programmet
