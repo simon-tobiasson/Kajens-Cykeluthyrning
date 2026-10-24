@@ -87,20 +87,29 @@ namespace Kajens_CykelUthyrning
             }
 
             Console.Write("Välj ett cykelnummer som ska lämnas in: ");
-            
-            if (int.TryParse(Console.ReadLine(), out int cykelNummerVal)) // Kollar om användaren skriver in ett heltal. Om det är ett heltal kommer koden att köras
+
+            string input = Console.ReadLine(); // Tar emot användarens input som en string.
+
+            if (int.TryParse(input, out int cykelNummerVal)) // Kollar om användaren skriver in ett heltal. Om det är ett heltal kommer koden att köras
             {
-                Fordon? fordonAttLämna = fordonUthyrningLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal)); // Kollar om heltalet som användaren skrev in finns med i listan med uthyrda fordon.
+                Fordon? fordonAttTaBort = fordonUthyrningLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal)); // Kollar om heltalet som användaren skrev in finns med i listan med uthyrda fordon.
 
-                if(fordonAttLämna != null) // Om fordonet finns med i listan så tas det bort från listan och returneras.
+                if(fordonAttTaBort != null) // Om fordonet finns med i listan så tas det bort från listan och returneras.
                 {
-                    fordonUthyrningLista.Remove(fordonAttLämna);
-                    return fordonAttLämna;
+                    fordonUthyrningLista.Remove(fordonAttTaBort);
+                    return fordonAttTaBort;
                 }
+                else
+                {
+                    Console.WriteLine($"Cykelnummer {cykelNummerVal} är inte en cykel som är uthyrd."); // Om fordonet inte finns med i listan kommer detta felmeddelande att skrivas ut och sen returnerar den null.
+                    return null;
+                }                
             }
-
-            Console.WriteLine($"Cykelnummer {cykelNummerVal} är inte en cykel som är uthyrd."); // Om fordonet inte finns med i listan kommer detta felmeddelande att skrivas ut och sen returnerar den null.
-            return null;
+            else // Om användaren inte skriver in ett heltal kommer denna koden köras.
+            {
+                Console.WriteLine("Du måste skriva ett cykelnummer."); 
+                return null;
+            }            
         }
 
         public int GetCykelNummerVal() // Enkel metod så andra klasser kan hämta "private" CykelNummerVal.
