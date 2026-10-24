@@ -17,17 +17,17 @@ namespace Kajens_CykelUthyrning
 
             if (!Uthyrd && BatteriNivå > 30)
             {
-                Console.WriteLine($"{Typ} {CykelNummer} hyrs ut.");
+                Console.WriteLine($"Cykelnummer {CykelNummer} hyrs ut.");
                 return !Uthyrd;
             }
             else if (Uthyrd)
             {
-                Console.WriteLine($"{Typ} {CykelNummer} kan inte hyras ut eftersom den är uthyrd.");
+                Console.WriteLine($"Cykelnummer {CykelNummer} är redan uthyrd.");
                 return false;
             }
             else
             {
-                Console.WriteLine($"{Typ} {CykelNummer} kan inte hyras ut eftersom batterinivån är för låg ({BatteriNivå}%). Ladda batteriet först.");
+                Console.WriteLine($"Cykelnummer {CykelNummer} kan inte hyras ut eftersom batterinivån är för låg ({BatteriNivå}%). Ladda batteriet först.");
                 return false;
             }
         }

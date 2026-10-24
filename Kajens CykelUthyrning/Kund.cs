@@ -28,6 +28,8 @@
 
         }
 
+
+
         public void KundÅlderVillkor() // Kollar hur gammal kunden är. 
         {
             if (kundÅlder < 15)

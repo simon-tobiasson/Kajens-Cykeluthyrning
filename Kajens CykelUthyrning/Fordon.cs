@@ -19,13 +19,22 @@
         public virtual bool KanHyrasUt() // Bas metoden för om ett fordon kan hyras ut. (Ändrar namnet från KanSäljas till KanHyrasUt.)
         {
             return !Uthyrd;
-        }
-        
+        }        
 
         public virtual void VisaInfo(int kundÅlder) // Bas metoden för alla fordon infon. La till int kundÅlder i parametern så funktion kan läsa den informationen.
         {
             string status = Uthyrd ? "uthyrd" : "ledig";
             Console.WriteLine($"Cykelnummer: {CykelNummer}, Typ: {Typ}, Timpris: {Timpris}, Status: {status}");
+        }
+
+        public void HyrUtFordon() // Metod så att andra klasser kan ändra "protected" Uthyrd till true.
+        {
+            Uthyrd = true;
+        }
+
+        public void LämnaInFordon() // Metod så att andra klasser kan ändra "protected" Uthyrd till false.
+        {
+            Uthyrd = false;
         }
 
         public int GetCykelNummerInt() // Metod så att andra klasser kan hämta "protected" CykelNummer i datatypen int. Används i Uthyrning - VäljFordon

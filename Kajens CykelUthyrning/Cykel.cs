@@ -10,13 +10,13 @@
         {
             if (!Uthyrd)
             {
-                Console.WriteLine($"{Typ} {CykelNummer} hyrs ut.");
+                Console.WriteLine($"Cykelnummer {CykelNummer} hyrs ut.");
                 return !Uthyrd;
             }
 
             else
             {
-                Console.WriteLine($"{Typ} {CykelNummer} kan inte hyras ut eftersom den är uthyrd.");
+                Console.WriteLine($"Cykelnummer {CykelNummer} kan inte hyras ut eftersom den är uthyrd.");
                 return false;
             }
         }        

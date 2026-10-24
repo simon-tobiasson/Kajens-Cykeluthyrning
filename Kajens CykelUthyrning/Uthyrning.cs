@@ -9,7 +9,6 @@ namespace Kajens_CykelUthyrning
 
         private int AntalUthyrdaTimmar { get; set; }
         private int CykelNummerVal { get; set; }
-        private Fordon UthyrdFordon { get; set; }
 
         public Uthyrning(int antalUthyrdaTimmar, int cykelNummerVal)
         {
@@ -61,10 +60,10 @@ namespace Kajens_CykelUthyrning
             }
    
 
-            if (cykelNummer.KanHyrasUt()) // Anropar metoden från bas klassen Fordon och borde lägga till valet i uthyrnings listan om villkoren möts.
+            if (cykelNummer.KanHyrasUt()) // Anropar metoden från Fordon, lägger in fordonet i uthyrningslistan och anropar HyrUtFordon metoden från Fordon för att ändra status till "uthyrd".
             {    
                 fordonUthyrningLista.Add(cykelNummer);
-                UthyrdFordon = cykelNummer;
+                cykelNummer.HyrUtFordon();
                 return;
             }
                         
@@ -92,12 +91,13 @@ namespace Kajens_CykelUthyrning
 
             if (int.TryParse(input, out int cykelNummerVal)) // Kollar om användaren skriver in ett heltal. Om det är ett heltal kommer koden att köras
             {
-                Fordon? fordonAttTaBort = fordonUthyrningLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal)); // Kollar om heltalet som användaren skrev in finns med i listan med uthyrda fordon.
+                Fordon? fordonAttLämna = fordonUthyrningLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal)); // Kollar om heltalet som användaren skrev in finns med i listan med uthyrda fordon.
 
-                if(fordonAttTaBort != null) // Om fordonet finns med i listan så tas det bort från listan och returneras.
+                if(fordonAttLämna != null) // Om fordonet finns med i listan så tas det bort från listan, fordonet blir ledigt och returneras.
                 {
-                    fordonUthyrningLista.Remove(fordonAttTaBort);
-                    return fordonAttTaBort;
+                    fordonUthyrningLista.Remove(fordonAttLämna);                    
+                    fordonAttLämna.LämnaInFordon();
+                    return fordonAttLämna;
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace Kajens_CykelUthyrning
             }            
         }
 
-        public int GetCykelNummerVal() // Enkel metod så andra klasser kan hämta "private" CykelNummerVal.
+        public int GetCykelNummerVal() // Metoden gör så att ndra klasser kan hämta "private" CykelNummerVal.
         {
             return CykelNummerVal;
         }
