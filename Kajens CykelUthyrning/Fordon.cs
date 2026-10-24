@@ -37,7 +37,17 @@
         {
             return CykelNummer == cykelNummer;
         }
+        public string GetTyp()
+        {
+            return Typ;
+        }
 
+        public int GetTimPris()
+        {
+            return Timpris;
+        }
+
+        
         public bool ÄrUthyrd() // Metod så att andra klasser kan hämta "protected" Uthyrd i datatypen bool. Används i Uthyrning - VäljFordon
         {
             return Uthyrd;

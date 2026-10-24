@@ -10,8 +10,9 @@ List<Fordon> fordonLista = new List<Fordon>()  // Fordon listan, försökte gör
 
 List<Kund> kundLista = new List<Kund>(); // Kund listan
 
-var uthyrning = new Uthyrning(0); // varje gång programmet körs, ny uthyrning.
+var uthyrning = new Uthyrning(0, 0); // varje gång programmet körs, ny uthyrning.
 var kund = new Kund("", 0, false); // varje gång programmet körs, ny kund.
+var lämnaTillbaka = new LämnaTillbaka();
 
 while (true) // While loopen
 {
@@ -45,7 +46,12 @@ while (true) // While loopen
 
     else if (val == 3) // Anropar VäljFordon funktionen från Uthyrning.cs - La till kund.GetKundÅlderInt() så att int kundÅlder sätts som det inmatade numret.
     {
-        uthyrning.VäljFordon(fordonLista, kund.GetKundNamn(), kund.GetKundÅlderInt()); 
+        uthyrning.VäljFordon(fordonLista, uthyrning.GetCykelNummerVal(), kund.GetKundNamn(), kund.GetKundÅlderInt()); 
+    }
+
+    else if (val == 4)
+    {
+        lämnaTillbaka.SkrivKvitto(uthyrning.GetUthyrdFordon(), uthyrning, kund);
     }
 
     else if (val == 6) // Avslutar programmet

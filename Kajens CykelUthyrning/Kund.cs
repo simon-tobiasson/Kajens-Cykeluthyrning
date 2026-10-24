@@ -47,14 +47,19 @@
             }
         }
 
+        public string GetKundNamn()
+        {
+            return kundNamn;
+        }
+
         public int GetKundÅlderInt()
         {
             return kundÅlder;
         }
 
-        public string GetKundNamn()
+        public bool GetÄrMedlem()
         {
-            return kundNamn;
+            return ärMedlem;
         }
 
         
