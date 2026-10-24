@@ -15,22 +15,58 @@
 
         public void RegistreraKund() //Flyttade kod blocket från val 2 hit till Kund.cs. Metoden anropas i val 2.
         {
-            Console.Write("Ange kundens namn: ");
-            kundNamn = Console.ReadLine();
+            if(!LäsInNamn())
+            {
+                return; // Avsluta RegistreraKund-metoden om namnet inte är korrekt inmatat
+            }
 
-            Console.Write("Ange kundens ålder: ");
-            kundÅlder = int.Parse(Console.ReadLine());
+            if (!LäsInÅlder())
+            {
+                return; // Avsluta RegistreraKund-metoden om åldern inte är korrekt inmatad
+            }
+            
+            KundÅlderVillkor(); // Anropar metoden nedanför.
 
-            KundÅlderVillkor();
-
-            Console.Write("Är kunden medlem? (ja/nej): ");
-            ärMedlem = Console.ReadLine().ToLower() == "ja";           
+            if(!LäsInMedlemskap())
+            {
+                return; // Avsluta RegistreraKund-metoden om medlemskapet inte är korrekt inmatat
+            }
+            
+            VisaKundInfo(); // Anropar metoden nedanför.
 
         }
 
+        private bool LäsInNamn()
+        {
+            Console.Write("Ange kundens namn: ");
+            kundNamn = Console.ReadLine();
 
+            if (string.IsNullOrWhiteSpace(kundNamn))
+            {
+                Console.WriteLine("Kan inte lämna fältet tomt. Du måste skriva någonting.");
+                return false;
+            }
+            return true;
+        }
 
-        public void KundÅlderVillkor() // Kollar hur gammal kunden är. 
+        private bool LäsInÅlder() 
+        {
+            Console.Write("Ange kundens ålder: ");
+            string input = Console.ReadLine();
+                        
+            if (int.TryParse(input, out int ålder))
+            {
+                kundÅlder = ålder;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Du måste skriva ett heltal för ålder.");
+                return false;
+            }
+        }
+
+        private void KundÅlderVillkor() // Kollar hur gammal kunden är. 
         {
             if (kundÅlder < 15)
             {
@@ -49,6 +85,38 @@
             }
         }
 
+        private bool LäsInMedlemskap() // Kollar om kunden är medlem eller inte. 
+        {
+            Console.Write("Är kunden medlem? (ja/nej): ");
+
+            string input = Console.ReadLine().ToLower();
+
+            if (input == "ja")
+            {
+                ärMedlem = true;
+                return true;
+            }
+            else if (input == "nej")
+            {
+                ärMedlem = false;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Ogiltigt svar. Måste skriva 'ja' eller 'nej'.");
+                return false;
+            }
+        }
+
+        private void VisaKundInfo() // Visar kund info, inte mer än det. 
+        {
+            string statusMedlem = ärMedlem ? "ja" : "nej"; // Om ärMedlem är true skriver "ja" ut, om den är false skriver den ut "nej". 
+
+            Console.WriteLine($"Kundnamn: {kundNamn}");
+            Console.WriteLine($"Kundålder: {kundÅlder}");
+            Console.WriteLine($"Är medlem: {statusMedlem}");
+        }
+
         public string GetKundNamn()
         {
             return kundNamn;
@@ -62,18 +130,6 @@
         public bool GetÄrMedlem()
         {
             return ärMedlem;
-        }
-
-        
-        public void VisaKundInfo() // Visar kund info, inte mer än det. 
-        {
-            string statusMedlem = ärMedlem ? "ja" : "nej"; // Om ärMedlem är true skriver "ja" ut, om den är false skriver den ut "nej". 
-
-            Console.WriteLine($"Kundnamn: {kundNamn}");
-            Console.WriteLine($"Kundålder: {kundÅlder}");
-            Console.WriteLine($"Är medlem: {statusMedlem}");
-        }
-
-
+        }  
     }
 }
