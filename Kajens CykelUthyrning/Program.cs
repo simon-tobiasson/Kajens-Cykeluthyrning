@@ -14,6 +14,7 @@ var uthyrning = new Uthyrning(0, 0); // varje gång programmet körs, ny uthyrni
 var kund = new Kund("", 0, false); // varje gång programmet körs, ny kund.
 var lämnaTillbaka = new LämnaTillbaka();
 
+
 while (true) // While loopen
 {
     Console.WriteLine("Välkommen till Kajens Cykeluthyrning!\n"); //Huvud menyn 
@@ -52,6 +53,11 @@ while (true) // While loopen
     else if (val == 4)
     {
         lämnaTillbaka.SkrivKvitto(uthyrning.GetUthyrdFordon(), uthyrning, kund);
+    }
+
+    else if (val == 5)
+    {
+        Elcykel.LaddaElcykelBatteri(fordonLista);
     }
 
     else if (val == 6) // Avslutar programmet

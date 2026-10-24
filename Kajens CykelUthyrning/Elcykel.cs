@@ -1,4 +1,5 @@
-﻿
+﻿using System.Linq;
+
 namespace Kajens_CykelUthyrning
 {
     public class Elcykel : Fordon // Subklass
@@ -46,12 +47,45 @@ namespace Kajens_CykelUthyrning
         }
 
 
+        public static void LaddaElcykelBatteri(List<Fordon> fordonLista)
+        {
+            int minNummer = fordonLista.Min(f => f.GetCykelNummerInt());
+            int maxNummer = fordonLista.Max(f => f.GetCykelNummerInt());
+            Console.Write("Ange cykelnummer på elcykeln som ska laddas: ");
 
+            if(int.TryParse(Console.ReadLine(), out int cykelNummerVal))
+            {
+                Fordon? fordon = fordonLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal));
+
+                if(fordon is Elcykel elcykel)
+                {
+                    elcykel.LaddaBatteri();
+                    return;
+                }
+                else if(fordon == null)
+                {
+                    Console.WriteLine($"{cykelNummerVal} finns inte med i listan. Välj mellan {minNummer} och {maxNummer}.");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine($"Cykelnummer: {cykelNummerVal} är inte elcykel. Välj en elcykel.");
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Du måste skriva ett nummer.");
+            }
+        }
         public void LaddaBatteri() // Metoden används inte än, kommer används den senare i alternativ 5 (ladda).
         {
+            
+            
             if (BatteriNivå < 100)
             {
-                Console.WriteLine("Batteriet laddar."); ;
+                BatteriNivå = 100;
+                Console.WriteLine("Batteriet har laddats och är nu fulladdad."); ;
             }
             else 
             { 
