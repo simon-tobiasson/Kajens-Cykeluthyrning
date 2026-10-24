@@ -17,19 +17,19 @@
         {
             if(!LäsInNamn())
             {
-                return; // Avsluta RegistreraKund-metoden om namnet inte är korrekt inmatat
+                return; // Avslutar RegistreraKund-metoden / Returnerar tillbaka till menyn om namnet inte är korrekt inmatat
             }
 
             if (!LäsInÅlder())
             {
-                return; // Avsluta RegistreraKund-metoden om åldern inte är korrekt inmatad
+                return; // Avslutar RegistreraKund-metoden / Returnerar tillbaka till menyn om åldern inte är korrekt inmatad
             }
             
             KundÅlderVillkor(); // Anropar metoden nedanför.
 
             if(!LäsInMedlemskap())
             {
-                return; // Avsluta RegistreraKund-metoden om medlemskapet inte är korrekt inmatat
+                return; // Avslutar RegistreraKund-metoden / Returnerar tillbaka till menyn om medlemskapet inte är korrekt inmatat
             }
             
             VisaKundInfo(); // Anropar metoden nedanför.
@@ -49,7 +49,7 @@
             return true;
         }
 
-        private bool LäsInÅlder() 
+        private bool LäsInÅlder() // Kollar om användaren matar in rätt datatyp för ålder, om inte så skrivs ett fel meddelande ut.
         {
             Console.Write("Ange kundens ålder: ");
             string input = Console.ReadLine();
@@ -85,7 +85,7 @@
             }
         }
 
-        private bool LäsInMedlemskap() // Kollar om kunden är medlem eller inte. 
+        private bool LäsInMedlemskap() // Kollar om användaren har matat in rätt information för medlemskap.
         {
             Console.Write("Är kunden medlem? (ja/nej): ");
 

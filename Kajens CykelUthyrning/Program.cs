@@ -3,7 +3,7 @@
 List<Fordon> fordonLista = new List<Fordon>()  // Fordon listan, försökte göra det med json-fil i början men det strulade för mycket så gick över till detta.
 {
     new Cykel(1, "Cykel", 40, false),
-    new Cykel(2, "Cykel", 40, true),
+    new Cykel(2, "Cykel", 40, false),
     new Elcykel(3, "Elcykel", 70, false, 80),
     new Elcykel(4, "Elcykel", 70, false, 20)
 };
@@ -48,7 +48,7 @@ while (true) // While loopen
         uthyrning.VäljFordon(fordonLista, uthyrning.GetCykelNummerVal(), kund.GetKundNamn(), kund.GetKundÅlderInt()); 
     }
 
-    else if (val == 4)
+    else if (val == 4) // Anropar GetUthyrdFordon funktionen från Uthyrning.cs och lagrar den i en variabel, sen skickar den med den variabeln till SkrivKvitto funktionen i LämnaTillbaka.cs
     {
         Fordon? återlämnatFordon = uthyrning.GetUthyrdFordon();
 
