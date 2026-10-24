@@ -61,22 +61,49 @@ namespace Kajens_CykelUthyrning
             }
    
 
-            if (cykelNummer.KanHyrasUt()) // Anropar metoden från bas klassen Fordon och borde lägga till valet i uthyrnings listan om villkoren möts. Jag har inte testat varje svar ännu så kan inte säga exakt.
-            {                
+            if (cykelNummer.KanHyrasUt()) // Anropar metoden från bas klassen Fordon och borde lägga till valet i uthyrnings listan om villkoren möts.
+            {    
                 fordonUthyrningLista.Add(cykelNummer);
                 UthyrdFordon = cykelNummer;
                 return;
-            }      
+            }
                         
             return;
         }
 
-        public Fordon GetUthyrdFordon()
+        public Fordon GetUthyrdFordon() // Metod som returnerar det fordom som är uthyrt.
         {
-            return UthyrdFordon;
+            if (fordonUthyrningLista.Count == 0) // Om listan är tom så kommer felmeddelandet att skrivas ut och metoden returnerar null.
+            {
+                Console.WriteLine("Det finns inga fordon som är uthyrda ännu.");
+                return null;
+            }
+
+            Console.WriteLine("Fordon som är uthyrda:");
+            
+            foreach(var fordon in fordonUthyrningLista) // Skriver ut alla fordon som är uthyrda.
+            {
+                Console.WriteLine($"Cykelnummer: {fordon.GetCykelNummerInt()}, Typ: {fordon.GetTyp()}");
+            }
+
+            Console.Write("Välj ett cykelnummer som ska lämnas in: ");
+            
+            if (int.TryParse(Console.ReadLine(), out int cykelNummerVal)) // Kollar om användaren skriver in ett heltal. Om det är ett heltal kommer koden att köras
+            {
+                Fordon? fordonAttLämna = fordonUthyrningLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal)); // Kollar om heltalet som användaren skrev in finns med i listan med uthyrda fordon.
+
+                if(fordonAttLämna != null) // Om fordonet finns med i listan så tas det bort från listan och returneras.
+                {
+                    fordonUthyrningLista.Remove(fordonAttLämna);
+                    return fordonAttLämna;
+                }
+            }
+
+            Console.WriteLine($"Cykelnummer {cykelNummerVal} är inte en cykel som är uthyrd."); // Om fordonet inte finns med i listan kommer detta felmeddelande att skrivas ut och sen returnerar den null.
+            return null;
         }
 
-        public int GetCykelNummerVal()
+        public int GetCykelNummerVal() // Enkel metod så andra klasser kan hämta "private" CykelNummerVal.
         {
             return CykelNummerVal;
         }
@@ -104,7 +131,7 @@ namespace Kajens_CykelUthyrning
             return true;            
         }      
         
-        public int GetAntalUthyrdaTimmar()
+        public int GetAntalUthyrdaTimmar() // Metod som returnerar det antal timmar som cykeln är uthyrd. Används i LämnaTillbaka.cs för att skriva ut kvittot.
         {
             return AntalUthyrdaTimmar;
         }

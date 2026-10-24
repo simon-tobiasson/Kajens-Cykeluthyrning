@@ -52,7 +52,12 @@ while (true) // While loopen
 
     else if (val == 4)
     {
-        lämnaTillbaka.SkrivKvitto(uthyrning.GetUthyrdFordon(), uthyrning, kund);
+        Fordon? återlämnatFordon = uthyrning.GetUthyrdFordon();
+
+        if (återlämnatFordon != null)
+        {
+            lämnaTillbaka.SkrivKvitto(återlämnatFordon, uthyrning, kund);
+        }        
     }
 
     else if (val == 5)
