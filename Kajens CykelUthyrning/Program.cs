@@ -57,7 +57,7 @@ while (true) // While loopen
 
     else if (val == 5)
     {
-        Elcykel.LaddaElcykelBatteri(fordonLista);
+        Elcykel.LaddaElcykelBatteri(fordonLista, kund.GetKundÅlderInt());
     }
 
     else if (val == 6) // Avslutar programmet

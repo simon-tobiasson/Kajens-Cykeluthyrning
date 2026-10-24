@@ -47,10 +47,18 @@ namespace Kajens_CykelUthyrning
         }
 
 
-        public static void LaddaElcykelBatteri(List<Fordon> fordonLista)
+        public static void LaddaElcykelBatteri(List<Fordon> fordonLista, int kundÅlder)
         {
             int minNummer = fordonLista.Min(f => f.GetCykelNummerInt());
             int maxNummer = fordonLista.Max(f => f.GetCykelNummerInt());
+
+            Console.WriteLine("Cyklar att välja mellan: ");
+
+            foreach (Fordon item in fordonLista)
+            {
+                item.VisaInfo(kundÅlder);
+            }
+
             Console.Write("Ange cykelnummer på elcykeln som ska laddas: ");
 
             if(int.TryParse(Console.ReadLine(), out int cykelNummerVal))
