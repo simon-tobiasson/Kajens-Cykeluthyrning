@@ -19,7 +19,7 @@ namespace Kajens_CykelUthyrning
             {
                 Console.WriteLine(); //Radbrytning
 
-                Console.WriteLine($"Cykelnummer {CykelNummer} går att hyra i max {BatteriNivå / 10} timmar.");
+                Console.WriteLine($"Cykelnummer {CykelNummer} kan bli uthyrd i max {BatteriNivå / 10} timmar.");
 
                 Console.WriteLine(); //Radbrytning
 
@@ -60,17 +60,26 @@ namespace Kajens_CykelUthyrning
         }
 
 
-        public static void LaddaElcykelBatteri(List<Fordon> fordonLista, int kundÅlder)
+        public static void LaddaElcykelBatteri(List<Fordon> fordonLista)
         {
             int minNummer = fordonLista.Min(f => f.GetCykelNummerInt());
             int maxNummer = fordonLista.Max(f => f.GetCykelNummerInt());
 
+            Console.WriteLine(); //Radbrytning
+
             Console.WriteLine("Cyklar att välja mellan: ");
+
+            Console.WriteLine(); //Radbrytning
 
             foreach (Fordon item in fordonLista)
             {
-                item.VisaInfo(kundÅlder);
+                if(item is Elcykel)
+                {
+                    item.VisaInfo(0);
+                }                
             }
+
+            Console.WriteLine(); //Radbrytning
 
             Console.Write("Ange cykelnummer på elcykeln som ska laddas: ");
 
@@ -86,6 +95,8 @@ namespace Kajens_CykelUthyrning
                 else if(fordon == null)
                 {
                     Console.WriteLine($"{cykelNummerVal} finns inte med i listan. Välj mellan {minNummer} och {maxNummer}.");
+
+                    Console.WriteLine(); //Radbrytning
                     return;
                 }
                 else
@@ -99,18 +110,20 @@ namespace Kajens_CykelUthyrning
                 Console.WriteLine("Du måste skriva ett nummer.");
             }
         }
-        public void LaddaBatteri() // Metoden används inte än, kommer används den senare i alternativ 5 (ladda).
-        {
-            
-            
+        public void LaddaBatteri() // Metoden används i metoden ovanför.
+        {           
             if (BatteriNivå < 100)
             {
                 BatteriNivå = 100;
-                Console.WriteLine("Batteriet har laddats och är nu fulladdad."); ;
+                Console.WriteLine("Batteriet har laddats och är nu fulladdad.");
+
+                Console.WriteLine(); //Radbrytning
             }
             else 
             { 
-                Console.WriteLine($"Batteriet är redan fulladdat"); 
+                Console.WriteLine($"Batteriet är redan fulladdat");
+
+                Console.WriteLine(); //Radbrytning
             }
         }
 

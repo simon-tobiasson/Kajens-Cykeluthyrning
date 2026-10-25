@@ -39,7 +39,9 @@ while (true) // While loopen
     }
 
     if (val == 1)
-    {        
+    {
+        Console.WriteLine(); //Radbrytning
+        
         foreach (Fordon fordon in fordonLista) // Itererar igenom fordonLista och skriver ut informationen. - La till kund.GetKundÅlderInt() så att int kundÅlder sätts som det inmatade numret.
         {
             fordon.VisaInfo(kund.GetKundÅlderInt());
@@ -70,7 +72,7 @@ while (true) // While loopen
 
     else if (val == 5)
     {
-        Elcykel.LaddaElcykelBatteri(fordonLista, kund.GetKundÅlderInt());
+        Elcykel.LaddaElcykelBatteri(fordonLista);
     }
 
     else if (val == 6) // Avslutar programmet

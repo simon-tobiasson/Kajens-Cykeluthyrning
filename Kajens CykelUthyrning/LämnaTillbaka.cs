@@ -40,16 +40,24 @@ namespace Kajens_CykelUthyrning
             decimal rabatt = Rabatt(fordon, uthyrning, kund);
             decimal totalSumma = TotalSumma(fordon, uthyrning, kund);
 
+            Console.WriteLine(); //Radbrytning
 
-            Console.WriteLine($"Cykelnummer: {uthyrning.GetCykelNummerVal()}");
+            Console.WriteLine($"Cykelnummer: {fordon.GetCykelNummerInt()}");
+
+            Console.WriteLine(); //Radbrytning
 
             Console.WriteLine("KVITTO");
-            Console.WriteLine($"{fordon.GetTyp()}, {uthyrning.GetAntalUthyrdaTimmar()} timmar * {fordon.GetTimPris()} kr  :  {delSumma} kr");
+
+            Console.WriteLine(); //Radbrytning
+
+            Console.WriteLine($"{fordon.GetTyp()}, {uthyrning.GetAntalUthyrdaTimmar()} timmar * {fordon.GetTimPris()} kr  :  {delSumma} kr");                      
 
             if (kund.GetÄrMedlem())
             {
-                Console.WriteLine($"Medlemsrabatt (10%)  {rabatt} kr");
+                Console.WriteLine($"Medlemsrabatt (10%)  {rabatt} kr");                
             }
+
+            Console.WriteLine(); //Radbrytning
 
             Console.WriteLine($"Att betala: {totalSumma} kr");
         }

@@ -96,12 +96,16 @@ namespace Kajens_CykelUthyrning
                 return null;
             }
 
+            Console.WriteLine(); //Radbrytning
+
             Console.WriteLine("Fordon som är uthyrda:");
             
             foreach(var fordon in fordonUthyrningLista) // Skriver ut alla fordon som är uthyrda.
             {
                 Console.WriteLine($"Cykelnummer: {fordon.GetCykelNummerInt()}, Typ: {fordon.GetTyp()}");
             }
+
+            Console.WriteLine(); //Radbrytning
 
             Console.Write("Välj ett cykelnummer som ska lämnas in: ");
 
@@ -120,12 +124,16 @@ namespace Kajens_CykelUthyrning
                 else
                 {
                     Console.WriteLine($"Cykelnummer {cykelNummerVal} är inte en cykel som är uthyrd."); // Om fordonet inte finns med i listan kommer detta felmeddelande att skrivas ut och sen returnerar den null.
+
+                    Console.WriteLine(); //Radbrytning
                     return null;
                 }                
             }
             else // Om användaren inte skriver in ett heltal kommer denna koden köras.
             {
-                Console.WriteLine("Du måste skriva ett cykelnummer."); 
+                Console.WriteLine("Du måste skriva ett cykelnummer.");
+
+                Console.WriteLine(); //Radbrytning
                 return null;
             }            
         }        
