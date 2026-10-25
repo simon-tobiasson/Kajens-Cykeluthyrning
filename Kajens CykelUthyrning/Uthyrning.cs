@@ -6,7 +6,6 @@ namespace Kajens_CykelUthyrning
     {
 
         private List<Fordon> fordonUthyrningLista = new List<Fordon>();  // En lista som håller reda på de fordon som blir uthyrda
-
         private int AntalUthyrdaTimmar { get; set; }
         private int CykelNummerVal { get; set; }
 
@@ -129,29 +128,26 @@ namespace Kajens_CykelUthyrning
                 Console.WriteLine("Du måste skriva ett cykelnummer."); 
                 return null;
             }            
-        }
-
-        public int GetCykelNummerVal() // Metoden gör så att ndra klasser kan hämta "private" CykelNummerVal.
-        {
-            return CykelNummerVal;
-        }
+        }        
 
         public bool KollaTimmar(Fordon cykelNummerVal) // Metoden kollar hur många timmar cykeln ska hyras ut. 
         {
 
-            if (cykelNummerVal is Elcykel elcykel && cykelNummerVal.ÄrUthyrd() == false) // Om cykeln är ledig och är en elcykel ska inte användaren kunna skriva fler timmar än vad batteri nivån är. 
+            if (cykelNummerVal is Elcykel elcykel && cykelNummerVal.GetUrhyrd() == false) // Om cykeln är ledig och är en elcykel ska inte användaren kunna skriva fler timmar än vad batteri nivån är. 
             {
                 Console.Write("Ange timmar: ");
                 AntalUthyrdaTimmar = int.Parse(Console.ReadLine());
 
                 if (AntalUthyrdaTimmar > elcykel.GetBatteriNivåInt() / 10) 
                 {
-                    Console.WriteLine("Kunden kan inte hyra elcykeln längre tid än dess batteri nivå.");
+                    Console.WriteLine("Kunden kan inte hyra en elcykeln längre tid än dess batteri nivå.");
+
+                    Console.WriteLine(); //Radbrytning
                     return false;
                 }               
             }
 
-            else if (cykelNummerVal is Cykel && cykelNummerVal.ÄrUthyrd() == false) // Om cykeln är ledig och är en vanlig cykel så tar den emot antal timmar.
+            else if (cykelNummerVal is Cykel && cykelNummerVal.GetUrhyrd() == false) // Om cykeln är ledig och är en vanlig cykel så tar den emot antal timmar.
             {
                 Console.Write("Ange timmar: ");
                 AntalUthyrdaTimmar = int.Parse(Console.ReadLine());
@@ -162,6 +158,11 @@ namespace Kajens_CykelUthyrning
         public int GetAntalUthyrdaTimmar() // Metod som returnerar det antal timmar som cykeln är uthyrd. Används i LämnaTillbaka.cs för att skriva ut kvittot.
         {
             return AntalUthyrdaTimmar;
+        }
+        
+        public int GetCykelNummerVal() // Metoden gör så att ndra klasser kan hämta "private" CykelNummerVal.
+        {
+            return CykelNummerVal;
         }
     }
 }

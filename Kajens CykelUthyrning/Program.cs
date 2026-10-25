@@ -30,7 +30,13 @@ while (true) // While loopen
 
     Console.Write("Välj ett alternativ: ");
 
-    int val = int.Parse(Console.ReadLine());
+    if(!int.TryParse(Console.ReadLine(), out int val)) // Kollar om användaren matar in heltal för menyn, om inte så skrivs ett fel meddelande ut.
+    {
+        Console.WriteLine("Du måste skriva ett heltal mellan 1-6.");
+        Console.WriteLine(); // Radbrytning
+
+        continue; // Går tillbaka till början av loopen
+    }
 
     if (val == 1)
     {        
@@ -70,6 +76,12 @@ while (true) // While loopen
     else if (val == 6) // Avslutar programmet
     {
         break;
+    }
+
+    else // Om användaren matar in ett nummer som inte finns i menyn, skrivs ett fel meddelande ut.
+    {
+        Console.WriteLine("Ogiltigt val. Välj ett nummer mellan 1-6.");
+        Console.WriteLine(); // Radbrytning
     }
 }
 

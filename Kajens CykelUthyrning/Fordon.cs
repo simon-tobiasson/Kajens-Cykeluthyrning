@@ -37,27 +37,27 @@
             Uthyrd = false;
         }
 
-        public int GetCykelNummerInt() // Metod så att andra klasser kan hämta "protected" CykelNummer i datatypen int. Används i Uthyrning - VäljFordon
+        public int GetCykelNummerInt() // Metod så att andra klasser kan hämta "protected" CykelNummer i datatypen int.
         {
             return CykelNummer;
         }
 
-        public bool GetCykelNummerBool(int cykelNummer) // Samma som metoden ovan falls med datatypen bool. Används också i Uthyrning - VäljFordon (Ändrar namnet så det är CykelNummerBool istället för att göra det enklare att förstå.)
+        public bool GetCykelNummerBool(int cykelNummer) // Metod så att andra klasser kan hämta "protected" CykelNummer i datatypen bool.
         {
             return CykelNummer == cykelNummer;
         }
-        public string GetTyp()
+        public string GetTyp() // Metod så att andra klasser kan hämta "protected" Typ i datatypen string. 
         {
             return Typ;
         }
 
-        public int GetTimPris()
+        public int GetTimPris() // Metod så att andra klasser kan hämta "protected" Timpris i datatypen int.
         {
             return Timpris;
         }
 
         
-        public bool ÄrUthyrd() // Metod så att andra klasser kan hämta "protected" Uthyrd i datatypen bool. Används i Uthyrning - VäljFordon
+        public bool GetUrhyrd() // Metod så att andra klasser kan hämta "protected" Uthyrd i datatypen bool.
         {
             return Uthyrd;
         }
