@@ -15,6 +15,8 @@
 
         public void RegistreraKund() //Flyttade kod blocket från val 2 hit till Kund.cs. Metoden anropas i val 2.
         {
+            Console.WriteLine(); //Radbrytning
+
             if(!LäsInNamn())
             {
                 return; // Avslutar RegistreraKund-metoden / Returnerar tillbaka till menyn om namnet inte är korrekt inmatat
@@ -31,8 +33,13 @@
             {
                 return; // Avslutar RegistreraKund-metoden / Returnerar tillbaka till menyn om medlemskapet inte är korrekt inmatat
             }
-            
+
+            Console.WriteLine(); //Radbrytning
+
+            Console.WriteLine($"Kunden {kundNamn} är registrerad.");
             VisaKundInfo(); // Anropar metoden nedanför.
+
+            Console.WriteLine(); //Radbrytning
 
         }
 

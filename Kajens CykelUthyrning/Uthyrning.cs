@@ -21,6 +21,8 @@ namespace Kajens_CykelUthyrning
             int minNummer = fordonLista.Min(f => f.GetCykelNummerInt()); // Hämtar det minsta cykelnumret från fordon listan.
             int maxNummer = fordonLista.Max(f => f.GetCykelNummerInt()); // Hämtar det högsta cykelnumret från samma lista.
 
+            Console.WriteLine(); //Radbrytning
+
             Console.WriteLine("Cyklar att välja mellan: ");
             
             foreach (Fordon item in fordonLista) 
@@ -28,13 +30,19 @@ namespace Kajens_CykelUthyrning
                 item.VisaInfo(kundÅlder);
             }
 
+            Console.WriteLine(); //Radbrytning
+
             Console.WriteLine($"Kund: {kundNamn}");
 
             Console.Write("Ange cykelnummer: ");
 
             if (!int.TryParse(Console.ReadLine(), out cykelNummerVal)) // Jag fixade det. Nu fungerar det som jag ville! Förhoppningsvis. Har inte tid att felsöka mer idag (kl 21:07). (Och det som detta kodblocket gör är att kolla om svaret är ett heltal. Om det inte är det slår fel meddelandet in.
             {
+                Console.WriteLine(); //Radbrytning
+
                 Console.WriteLine($"Ogiltigt nummer. Välj ett nummer mellan numrerna i listan, {minNummer} och {maxNummer}.");
+
+                Console.WriteLine(); //Radbrytning
                 return;
             }
             
@@ -42,32 +50,43 @@ namespace Kajens_CykelUthyrning
 
             if(cykelNummer == null) // Om svaret inte finns med i listan räknas det som null och då kommer detta fel meddelandet istället.
             {
+                Console.WriteLine(); //Radbrytning
+
                 Console.WriteLine($"Fordon med cykelnummer {cykelNummerVal} finns inte i listan. Välj ett nummer mellan numrerna i listan, {minNummer} och {maxNummer}.");
+
+                Console.WriteLine(); //Radbrytning
                 return;
             }
 
+            
 
             if(kundÅlder >= 15 && kundÅlder <= 17 && cykelNummer is Elcykel) // Villkoret skriver ut felmeddelandet och går tillbaka om användaren försöker hyra en elcykel även om kunden är 15-17 år.
             {
+                Console.WriteLine(); //Radbrytning
+
                 Console.WriteLine("En kund mellan 15-17 år kan inte hyra en elcykel.");
+
+                Console.WriteLine(); //Radbrytning
                 return;
             }  
             
-            
+            if (!cykelNummer.KanHyrasUt())
+            {
+                return;
+            }
+
             if (KollaTimmar(cykelNummer) == false) // Anropar KollaTimmar metoden från längre ner i Uthyrning klassen.
             {            
                 return;
-            }
-   
+            }      
 
-            if (cykelNummer.KanHyrasUt()) // Anropar metoden från Fordon, lägger in fordonet i uthyrningslistan och anropar HyrUtFordon metoden från Fordon för att ändra status till "uthyrd".
-            {    
-                fordonUthyrningLista.Add(cykelNummer);
-                cykelNummer.HyrUtFordon();
-                return;
-            }
-                        
+            fordonUthyrningLista.Add(cykelNummer);
+            cykelNummer.HyrUtFordon();
+            Console.WriteLine($"Cykelnummer {cykelNummerVal} hyrs ut i {AntalUthyrdaTimmar} timmar.");
+
+            Console.WriteLine(); //Radbrytning
             return;
+            
         }
 
         public Fordon GetUthyrdFordon() // Metod som returnerar det fordom som är uthyrt.

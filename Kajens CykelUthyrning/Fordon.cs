@@ -24,7 +24,7 @@
         public virtual void VisaInfo(int kundÅlder) // Bas metoden för alla fordon infon. La till int kundÅlder i parametern så funktion kan läsa den informationen.
         {
             string status = Uthyrd ? "uthyrd" : "ledig";
-            Console.WriteLine($"Cykelnummer: {CykelNummer}, Typ: {Typ}, Timpris: {Timpris}, Status: {status}");
+            Console.WriteLine($"Cykelnummer: {CykelNummer}, Typ: {Typ}, Timpris: {Timpris}, Status: {status}");            
         }
 
         public void HyrUtFordon() // Metod så att andra klasser kan ändra "protected" Uthyrd till true.

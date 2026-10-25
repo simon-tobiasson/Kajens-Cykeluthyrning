@@ -10,7 +10,7 @@
         {
             if (!Uthyrd)
             {
-                Console.WriteLine($"Cykelnummer {CykelNummer} hyrs ut.");
+                Console.WriteLine($"Cykelnummer {CykelNummer} kan hyras ut.");
                 return !Uthyrd;
             }
 

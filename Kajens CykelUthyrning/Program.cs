@@ -18,6 +18,7 @@ var lämnaTillbaka = new LämnaTillbaka();
 while (true) // While loopen
 {
     Console.WriteLine("Välkommen till Kajens Cykeluthyrning!\n"); //Huvud menyn 
+
     Console.WriteLine("Vad vill du göra?");
     Console.WriteLine("1. Visa fordon");
     Console.WriteLine("2. Lägg till kund");
@@ -25,17 +26,20 @@ while (true) // While loopen
     Console.WriteLine("4. Lämna tillbaka cykel");
     Console.WriteLine("5. Ladda elcykel batteri");
     Console.WriteLine("6. Avsluta");
+    Console.WriteLine(); // Radbrytning
 
     Console.Write("Välj ett alternativ: ");
 
     int val = int.Parse(Console.ReadLine());
 
     if (val == 1)
-    {
+    {        
         foreach (Fordon fordon in fordonLista) // Itererar igenom fordonLista och skriver ut informationen. - La till kund.GetKundÅlderInt() så att int kundÅlder sätts som det inmatade numret.
         {
             fordon.VisaInfo(kund.GetKundÅlderInt());
         }
+
+        Console.WriteLine(); //Radbrytning
     }
 
     else if (val == 2) // Tar in den inmatade informationen om kunden och lagrar den i listan, sen skriver den ut informationen. Här kommer jag nog fixa iordning koden så det ser renare ut, flytta den till en metod i kund klassen och anropa den. Behöver ändå en metod som kollar åldern och avslutar programmet om kunden är under 15 år.

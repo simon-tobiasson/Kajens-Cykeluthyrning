@@ -17,33 +17,46 @@ namespace Kajens_CykelUthyrning
 
             if (!Uthyrd && BatteriNivå > 30)
             {
-                Console.WriteLine($"Cykelnummer {CykelNummer} hyrs ut.");
+                Console.WriteLine(); //Radbrytning
+
+                Console.WriteLine($"Cykelnummer {CykelNummer} går att hyra i max {BatteriNivå / 10} timmar.");
+
+                Console.WriteLine(); //Radbrytning
+
                 return !Uthyrd;
             }
             else if (Uthyrd)
             {
+                Console.WriteLine(); //Radbrytning
+
                 Console.WriteLine($"Cykelnummer {CykelNummer} är redan uthyrd.");
+
+                Console.WriteLine(); //Radbrytning
                 return false;
             }
             else
             {
+                Console.WriteLine(); //Radbrytning
+
                 Console.WriteLine($"Cykelnummer {CykelNummer} kan inte hyras ut eftersom batterinivån är för låg ({BatteriNivå}%). Ladda batteriet först.");
+
+                Console.WriteLine(); //Radbrytning
                 return false;
             }
         }
 
         public override void VisaInfo(int kundÅlder) // Polymorferar metoden från basklassen, skriver ut ett meddelande när kunden är mellan 15-17 år och allt runt omkring visar den elcykel informationen.
-        {   
-            if(kundÅlder >= 15 && kundÅlder <= 17)
+        {
+            
+            if (kundÅlder >= 15 && kundÅlder <= 17)
             {
-
                 Console.WriteLine($"Cykelnummer: {CykelNummer}, Typ: {Typ} - Kom ihåg, kunder mellan 15-17 år kan inte hyra en elcykel");
             }
             else 
-            {
+            {                
                 string status = Uthyrd ? "uthyrd" : "ledig";
                 Console.WriteLine($"Cykelnummer: {CykelNummer}, Typ: {Typ}, Timpris: {Timpris}, Status: {status}, Batterinivå: {BatteriNivå}%");
-            }                       
+            }            
         }
 
 
