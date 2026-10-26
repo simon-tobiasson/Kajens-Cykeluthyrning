@@ -52,7 +52,8 @@ while (true) // While loopen
 
     else if (val == 2) // Tar in den inmatade informationen om kunden och lagrar den i listan, sen skriver den ut informationen. Här kommer jag nog fixa iordning koden så det ser renare ut, flytta den till en metod i kund klassen och anropa den. Behöver ändå en metod som kollar åldern och avslutar programmet om kunden är under 15 år.
     {
-        kund.RegistreraKund();        
+        kund.RegistreraKund();
+        kundLista.Add(kund); // Lägger till kunden i kundLista
     }
 
     else if (val == 3) // Anropar VäljFordon funktionen från Uthyrning.cs - La till kund.GetKundÅlderInt() så att int kundÅlder sätts som det inmatade numret.
