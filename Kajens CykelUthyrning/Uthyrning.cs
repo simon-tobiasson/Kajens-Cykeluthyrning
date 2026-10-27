@@ -39,7 +39,7 @@ namespace Kajens_CykelUthyrning
             {
                 Console.WriteLine(); //Radbrytning
 
-                Console.WriteLine($"Ogiltigt nummer. Välj ett nummer mellan numrerna i listan, {minNummer} och {maxNummer}.");
+                Console.WriteLine($"Ogiltigt nummer. Välj ett nummer mellan numren i listan, {minNummer} och {maxNummer}.");
 
                 Console.WriteLine(); //Radbrytning
                 return;
@@ -51,7 +51,7 @@ namespace Kajens_CykelUthyrning
             {
                 Console.WriteLine(); //Radbrytning
 
-                Console.WriteLine($"Fordon med cykelnummer {cykelNummerVal} finns inte i listan. Välj ett nummer mellan numrerna i listan, {minNummer} och {maxNummer}.");
+                Console.WriteLine($"Fordon med cykelnummer {cykelNummerVal} finns inte i listan. Välj ett nummer mellan numren i listan, {minNummer} och {maxNummer}.");
 
                 Console.WriteLine(); //Radbrytning
                 return;
