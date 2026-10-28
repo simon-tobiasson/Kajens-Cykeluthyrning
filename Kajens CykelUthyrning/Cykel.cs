@@ -2,21 +2,21 @@
 {
     public class Cykel : Fordon // Andra subklassen med basklassen Fordon.
     {
-        public Cykel(int cykelNummer, string typ, int timpris, bool uthyrd) : base(cykelNummer, typ, timpris, uthyrd) // Har inte dubbelkollat om en konstruktor behövs här då den inte ändrar någonting, men det gör det enklare för ögat att se att den finns. Kollar det imorgon!
+        public Cykel(int bicycleNumber, string type, int hourlyPrice, bool rented) : base(bicycleNumber, type, hourlyPrice, rented)
         {
         }
 
-        public override bool KanHyrasUt() // Polymorferar något med att lägga till utskrift. 
+        public override bool CanBeRented() // Polymorferar något med att lägga till utskrift. 
         {
-            if (!Uthyrd)
+            if (!Rented)
             {
-                Console.WriteLine($"Cykelnummer {CykelNummer} kan hyras ut.");
-                return !Uthyrd;
+                Console.WriteLine($"Cykelnummer {BicycleNumber} kan hyras ut.");
+                return !Rented;
             }
 
             else
             {
-                Console.WriteLine($"Cykelnummer {CykelNummer} kan inte hyras ut eftersom den är uthyrd.");
+                Console.WriteLine($"Cykelnummer {BicycleNumber} kan inte hyras ut eftersom den är uthyrd.");
                 return false;
             }
         }        

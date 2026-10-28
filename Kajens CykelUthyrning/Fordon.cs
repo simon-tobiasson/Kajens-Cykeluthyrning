@@ -3,63 +3,63 @@
     public class Fordon
     {
 
-        protected int CykelNummer { get; set; }
-        protected string Typ { get; set; }
-        protected int Timpris { get; set; }
-        protected bool Uthyrd { get; set; }
+        protected int BicycleNumber { get; set; }
+        protected string Type { get; set; }
+        protected int HourlyPrice { get; set; }
+        protected bool Rented { get; set; }
 
-        public Fordon(int cykelNummer, string typ, int timpris, bool uthyrd) // Konstruktorn för basklassen
+        public Fordon(int bicycleNumber, string type, int hourlyPrice, bool rented) // Konstruktorn för basklassen
         {
-            CykelNummer = cykelNummer;
-            Typ = typ;
-            Timpris = timpris;
-            Uthyrd = uthyrd;
+            BicycleNumber = bicycleNumber;
+            Type = type;
+            HourlyPrice = hourlyPrice;
+            Rented = rented;
         }
 
-        public virtual bool KanHyrasUt() // Bas metoden för om ett fordon kan hyras ut. (Ändrar namnet från KanSäljas till KanHyrasUt.)
+        public virtual bool CanBeRented() // Bas metoden för om ett fordon kan hyras ut. (Ändrar namnet från KanSäljas till CanBeRented.)
         {
-            return !Uthyrd;
+            return !Rented;
         }        
 
-        public virtual void VisaInfo(int kundÅlder) // Bas metoden för alla fordon infon. La till int kundÅlder i parametern så funktion kan läsa den informationen.
+        public virtual void ShowInfo(int kundÅlder) // Bas metoden för alla fordon infon. La till int CustomerAge i parametern så funktion kan läsa den informationen.
         {
-            string status = Uthyrd ? "uthyrd" : "ledig";
-            Console.WriteLine($"Cykelnummer: {CykelNummer}, Typ: {Typ}, Timpris: {Timpris}, Status: {status}");            
+            string status = Rented ? "uthyrd" : "ledig";
+            Console.WriteLine($"Cykelnummer: {BicycleNumber}, Typ: {Type}, Timpris: {HourlyPrice}, Status: {status}");            
         }
 
-        public void HyrUtFordon() // Metod så att andra klasser kan ändra "protected" Uthyrd till true.
+        public void RentVehicle() // Metod så att andra klasser kan ändra "protected" Rented till true.
         {
-            Uthyrd = true;
+            Rented = true;
         }
 
-        public void LämnaInFordon() // Metod så att andra klasser kan ändra "protected" Uthyrd till false.
+        public void ReturnVehicle() // Metod så att andra klasser kan ändra "protected" Rented till false.
         {
-            Uthyrd = false;
+            Rented = false;
         }
 
-        public int GetCykelNummerInt() // Metod så att andra klasser kan hämta "protected" CykelNummer i datatypen int.
+        public int GetBicycleNumberInt() // Metod så att andra klasser kan hämta "protected" BicycleNumber i datatypen int.
         {
-            return CykelNummer;
+            return BicycleNumber;
         }
 
-        public bool GetCykelNummerBool(int cykelNummer) // Metod så att andra klasser kan hämta "protected" CykelNummer i datatypen bool.
+        public bool GetBicycleNumberBool(int bicycleNumber) // Metod så att andra klasser kan hämta "protected" BicycleNumber i datatypen bool.
         {
-            return CykelNummer == cykelNummer;
+            return BicycleNumber == bicycleNumber;
         }
-        public string GetTyp() // Metod så att andra klasser kan hämta "protected" Typ i datatypen string. 
+        public string GetType() // Metod så att andra klasser kan hämta "protected" Type i datatypen string. 
         {
-            return Typ;
+            return Type;
         }
 
-        public int GetTimPris() // Metod så att andra klasser kan hämta "protected" Timpris i datatypen int.
+        public int GetHourlyPrice() // Metod så att andra klasser kan hämta "protected" HourlyPrice i datatypen int.
         {
-            return Timpris;
+            return HourlyPrice;
         }
 
         
-        public bool GetUrhyrd() // Metod så att andra klasser kan hämta "protected" Uthyrd i datatypen bool.
+        public bool GetRented() // Metod så att andra klasser kan hämta "protected" Rented i datatypen bool.
         {
-            return Uthyrd;
+            return Rented;
         }
     }
 }

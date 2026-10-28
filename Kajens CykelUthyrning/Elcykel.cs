@@ -4,66 +4,68 @@ namespace Kajens_CykelUthyrning
 {
     public class Elcykel : Fordon // Subklass
     {
-        private int BatteriNivå { get; set; } // Utökar klassen med BatteriNivå då den andra subklassen inte har det. 
+        private int BatteryLevel { get; set; } // Utökar klassen med BatteryLevel då den andra subklassen inte har det. 
 
-        public Elcykel(int cykelNummer, string typ, int timpris, bool uthyrd, int batteriNivå) : base(cykelNummer, typ, timpris, uthyrd) 
+        public Elcykel(int bicycleNumber, string type, int hourlyPrice, bool rented, int batteryLevel) : base(bicycleNumber, type, hourlyPrice, rented)
         {
-            BatteriNivå = batteriNivå;
+            BatteryLevel = batteryLevel;
         }
 
-        public override bool KanHyrasUt() // Polymorferar metoden från basklassen till att ge felmeddelande till olika situationer.
+        public override bool CanBeRented() // Polymorferar metoden från basklassen till att ge felmeddelande till olika situationer.
         {
             
 
-            if (!Uthyrd && BatteriNivå > 30)
+            if (!Rented && BatteryLevel > 30) // Om cykeln inte är uthyrd och batterinivån är över 30% kan den hyras ut.
             {
                 Console.WriteLine(); //Radbrytning
 
-                Console.WriteLine($"Cykelnummer {CykelNummer} kan bli uthyrd i max {BatteriNivå / 10} timmar.");
+                Console.WriteLine($"Cykelnummer {BicycleNumber} kan bli uthyrd i max {BatteryLevel / 10} timmar.");
 
                 Console.WriteLine(); //Radbrytning
 
-                return !Uthyrd;
+                return !Rented;
             }
-            else if (Uthyrd)
+
+            else if (Rented) // Om cykeln är uthyrd kommer detta felmeddelande att skrivas ut.
             {
                 Console.WriteLine(); //Radbrytning
 
-                Console.WriteLine($"Cykelnummer {CykelNummer} är redan uthyrd.");
+                Console.WriteLine($"Cykelnummer {BicycleNumber} är redan uthyrd.");
 
                 Console.WriteLine(); //Radbrytning
                 return false;
             }
-            else
+
+            else // Om cykeln inte är uthyrd men batterinivån är under 30% kommer detta felmeddelande att skrivas ut.
             {
                 Console.WriteLine(); //Radbrytning
 
-                Console.WriteLine($"Cykelnummer {CykelNummer} kan inte hyras ut eftersom batterinivån är för låg ({BatteriNivå}%). Ladda batteriet först.");
+                Console.WriteLine($"Cykelnummer {BicycleNumber} kan inte hyras ut eftersom batterinivån är för låg ({BatteryLevel}%). Ladda batteriet först.");
 
                 Console.WriteLine(); //Radbrytning
                 return false;
             }
         }
 
-        public override void VisaInfo(int kundÅlder) // Polymorferar metoden från basklassen, skriver ut ett meddelande när kunden är mellan 15-17 år och allt runt omkring visar den elcykel informationen.
+        public override void ShowInfo(int customerAge) // Polymorferar metoden från basklassen, skriver ut ett meddelande när kunden är mellan 15-17 år och allt runt omkring visar den electricBicycle informationen.
         {
             
-            if (kundÅlder >= 15 && kundÅlder <= 17)
+            if (customerAge >= 15 && customerAge <= 17)
             {
-                Console.WriteLine($"Cykelnummer: {CykelNummer}, Typ: {Typ} - Kom ihåg, kunder mellan 15-17 år kan inte hyra en elcykel");
+                Console.WriteLine($"Cykelnummer: {BicycleNumber}, Typ: {Type} - Kom ihåg, kunder mellan 15-17 år kan inte hyra en elcykel");
             }
             else 
             {                
-                string status = Uthyrd ? "uthyrd" : "ledig";
-                Console.WriteLine($"Cykelnummer: {CykelNummer}, Typ: {Typ}, Timpris: {Timpris}, Status: {status}, Batterinivå: {BatteriNivå}%");
+                string status = Rented ? "uthyrd" : "ledig";
+                Console.WriteLine($"Cykelnummer: {BicycleNumber}, Typ: {Type}, Timpris: {HourlyPrice}, Status: {status}, Batterinivå: {BatteryLevel}%");
             }            
         }
 
 
-        public static void LaddaElcykelBatteri(List<Fordon> fordonLista)
+        public static void ChargeElectricBicycleBattery(List<Fordon> vehiclelist)
         {
-            int minNummer = fordonLista.Min(f => f.GetCykelNummerInt());
-            int maxNummer = fordonLista.Max(f => f.GetCykelNummerInt());
+            int minNummer = vehiclelist.Min(v => v.GetBicycleNumberInt());
+            int maxNummer = vehiclelist.Max(v => v.GetBicycleNumberInt());
 
             Console.WriteLine(); //Radbrytning
 
@@ -71,11 +73,11 @@ namespace Kajens_CykelUthyrning
 
             Console.WriteLine(); //Radbrytning
 
-            foreach (Fordon item in fordonLista)
+            foreach (Fordon item in vehiclelist)
             {
                 if(item is Elcykel)
                 {
-                    item.VisaInfo(0);
+                    item.ShowInfo(0);
                 }                
             }
 
@@ -83,25 +85,25 @@ namespace Kajens_CykelUthyrning
 
             Console.Write("Ange cykelnummer på elcykeln som ska laddas: ");
 
-            if(int.TryParse(Console.ReadLine(), out int cykelNummerVal))
+            if(int.TryParse(Console.ReadLine(), out int bicycleNumberChoice))
             {
-                Fordon? fordon = fordonLista.FirstOrDefault(f => f.GetCykelNummerBool(cykelNummerVal));
+                Fordon? vehicle = vehiclelist.FirstOrDefault(f => f.GetBicycleNumberBool(bicycleNumberChoice));
 
-                if(fordon is Elcykel elcykel)
+                if(vehicle is Elcykel electricBicycle)
                 {
-                    elcykel.LaddaBatteri();
+                    electricBicycle.ChargeBattery();
                     return;
                 }
-                else if(fordon == null)
+                else if(vehicle == null)
                 {
-                    Console.WriteLine($"{cykelNummerVal} finns inte med i listan. Välj mellan {minNummer} och {maxNummer}.");
+                    Console.WriteLine($"{bicycleNumberChoice} finns inte med i listan. Välj mellan {minNummer} och {maxNummer}.");
 
                     Console.WriteLine(); //Radbrytning
                     return;
                 }
                 else
                 {
-                    Console.WriteLine($"Cykelnummer: {cykelNummerVal} är inte elcykel. Välj en elcykel.");
+                    Console.WriteLine($"Cykelnummer: {bicycleNumberChoice} är inte elcykel. Välj en elcykel.");
                     return;
                 }
             }
@@ -110,11 +112,11 @@ namespace Kajens_CykelUthyrning
                 Console.WriteLine("Du måste skriva ett nummer.");
             }
         }
-        public void LaddaBatteri() // Metoden används i metoden ovanför.
+        public void ChargeBattery() // Metoden används i metoden ovanför.
         {           
-            if (BatteriNivå < 100)
+            if (BatteryLevel < 100)
             {
-                BatteriNivå = 100;
+                BatteryLevel = 100;
                 Console.WriteLine("Batteriet har laddats och är nu fulladdad.");
 
                 Console.WriteLine(); //Radbrytning
@@ -127,9 +129,9 @@ namespace Kajens_CykelUthyrning
             }
         }
 
-        public int GetBatteriNivåInt() // Gör det möjligt för andra klasser att läsa in den privata egenskapen. Förtillfället läses den bara in i Uthyrning - KollaTimmar.
+        public int GetBatteryLevelInt() // Gör det möjligt för andra klasser att läsa in den privata egenskapen. Förtillfället läses den bara in i Uthyrning - CheckHours.
         {
-            return BatteriNivå;
+            return BatteryLevel;
         }
     }
 }

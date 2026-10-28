@@ -7,42 +7,42 @@ namespace Kajens_CykelUthyrning
     public class LämnaTillbaka
     {
 
-        public decimal DelSumma(Fordon fordon, Uthyrning uthyrning) // DelSumma metoden beräknar summan utan rabatt
+        public decimal SubTotal(Fordon vehicle, Uthyrning rental) // SubTotal metoden beräknar summan utan discount
         {
             decimal sum = 0;
 
-            sum = fordon.GetTimPris() * uthyrning.GetAntalUthyrdaTimmar(); // Hämtar timpris från fordon och multiplicerar med antal uthyrda timmar från uthyrning
+            sum = vehicle.GetHourlyPrice() * rental.GetRentedHoursAmount(); // Hämtar timpris från vehicle och multiplicerar med antal uthyrda timmar från rental
             return sum;
         }
 
-        public decimal Rabatt(Fordon fordon, Uthyrning uthyrning, Kund kund) // Rabatt metoden beräknar rabatten om kunden är medlem
+        public decimal Discount(Fordon vehicle, Uthyrning rental, Kund customer) // Discount metoden beräknar rabatten om kunden är medlem
         {
-            decimal sum = DelSumma(fordon, uthyrning);
-            decimal medlemRabatt = 0;
+            decimal sum = SubTotal(vehicle, rental);
+            decimal memberDiscount = 0;
 
-            if(kund.GetÄrMedlem() == true)
+            if(customer.GetIsMember() == true)
             {
-                medlemRabatt = sum / 10;
+                memberDiscount = sum / 10;
             }
 
-            return medlemRabatt;
+            return memberDiscount;
         }
 
-        public decimal TotalSumma(Fordon fordon, Uthyrning uthyrning, Kund kund) // TotalSumma metoden beräknar summan med rabatt
+        public decimal TotalSum(Fordon vehicle, Uthyrning rental, Kund customer) // TotalSum metoden beräknar summan med discount
         {
-            return DelSumma(fordon, uthyrning) - Rabatt(fordon, uthyrning, kund);
+            return SubTotal(vehicle, rental) - Discount(vehicle, rental, customer);
         }
 
         
-        public void SkrivKvitto(Fordon fordon, Uthyrning uthyrning, Kund kund) // SkrivKvitto metoden skriver ut kvittot med information om cykelnummer, typ, antal uthyrda timmar, timpris, delsumma, rabatt och totalsumma
+        public void PrintReceipt(Fordon vehicle, Uthyrning rental, Kund customer) // PrintReceipt metoden skriver ut kvittot med information om cykelnummer, typ, antal uthyrda timmar, timpris, delsumma, discount och totalsumma
         {
-            decimal delSumma = DelSumma(fordon, uthyrning);
-            decimal rabatt = Rabatt(fordon, uthyrning, kund);
-            decimal totalSumma = TotalSumma(fordon, uthyrning, kund);
+            decimal subTotal = SubTotal(vehicle, rental);
+            decimal discount = Discount(vehicle, rental, customer);
+            decimal totalSum = TotalSum(vehicle, rental, customer);
 
             Console.WriteLine(); //Radbrytning
 
-            Console.WriteLine($"Cykelnummer: {fordon.GetCykelNummerInt()}");
+            Console.WriteLine($"Cykelnummer: {vehicle.GetBicycleNumberInt()}");
 
             Console.WriteLine(); //Radbrytning
 
@@ -50,16 +50,16 @@ namespace Kajens_CykelUthyrning
 
             Console.WriteLine(); //Radbrytning
 
-            Console.WriteLine($"{fordon.GetTyp()}, {uthyrning.GetAntalUthyrdaTimmar()} timmar * {fordon.GetTimPris()} kr  :  {delSumma} kr");                      
+            Console.WriteLine($"{vehicle.GetType()}, {rental.GetRentedHoursAmount()} timmar * {vehicle.GetHourlyPrice()} kr  :  {subTotal} kr");                      
 
-            if (kund.GetÄrMedlem())
+            if (customer.GetIsMember())
             {
-                Console.WriteLine($"Medlemsrabatt (10%)  {rabatt} kr");                
+                Console.WriteLine($"Medlemsrabatt (10%)  {discount} kr");                
             }
 
             Console.WriteLine(); //Radbrytning
 
-            Console.WriteLine($"Att betala: {totalSumma} kr");
+            Console.WriteLine($"Att betala: {totalSum} kr");
         }
     }
 }

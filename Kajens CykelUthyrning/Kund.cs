@@ -2,54 +2,54 @@
 {
     public class Kund
     {
-        private string kundNamn { get; set; }
-        private int kundÅlder { get; set; }
-        private bool ärMedlem { get; set; }
+        private string CustomerName { get; set; }
+        private int CustomerAge { get; set; }
+        private bool IsMember { get; set; }
 
-        public Kund(string KundNamn, int KundÅlder, bool ÄrMedlem)
+        public Kund(string customerName, int customerAge, bool isMember)
         {
-            kundNamn = KundNamn;
-            kundÅlder = KundÅlder;
-            ärMedlem = ÄrMedlem;
+            CustomerName = customerName;
+            CustomerAge = customerAge;
+            IsMember = isMember;
         }
 
-        public void RegistreraKund() //Flyttade kod blocket från val 2 hit till Kund.cs. Metoden anropas i val 2.
+        public void RegisterCustomer() //Flyttade kod blocket från val 2 hit till Kund.cs. Metoden anropas i val 2.
         {
             Console.WriteLine(); //Radbrytning
 
-            if(!LäsInNamn())
+            if(!ReadCustomerName())
             {
-                return; // Avslutar RegistreraKund-metoden / Returnerar tillbaka till menyn om namnet inte är korrekt inmatat
+                return; // Avslutar RegisterCustomer-metoden / Returnerar tillbaka till menyn om namnet inte är korrekt inmatat
             }
 
-            if (!LäsInÅlder())
+            if (!ReadCustomerAge())
             {
-                return; // Avslutar RegistreraKund-metoden / Returnerar tillbaka till menyn om åldern inte är korrekt inmatad
+                return; // Avslutar RegisterCustomer-metoden / Returnerar tillbaka till menyn om åldern inte är korrekt inmatad
             }
             
-            KundÅlderVillkor(); // Anropar metoden nedanför.
+            CustomerAgeTerms(); // Anropar metoden nedanför.
 
-            if(!LäsInMedlemskap())
+            if(!ReadCustomerMembership())
             {
-                return; // Avslutar RegistreraKund-metoden / Returnerar tillbaka till menyn om medlemskapet inte är korrekt inmatat
+                return; // Avslutar RegisterCustomer-metoden / Returnerar tillbaka till menyn om medlemskapet inte är korrekt inmatat
             }
 
             Console.WriteLine(); //Radbrytning
 
-            Console.WriteLine($"Kunden {kundNamn} är registrerad.");
-            VisaKundInfo(); // Anropar metoden nedanför.
+            Console.WriteLine($"Kunden {CustomerName} är registrerad.");
+            ShowCustomerInfo(); // Anropar metoden nedanför.
 
             Console.WriteLine(); //Radbrytning
 
              
         }
 
-        private bool LäsInNamn()
+        private bool ReadCustomerName()
         {
             Console.Write("Ange kundens namn: ");
-            kundNamn = Console.ReadLine();
+            CustomerName = Console.ReadLine();
 
-            if (string.IsNullOrWhiteSpace(kundNamn))
+            if (string.IsNullOrWhiteSpace(CustomerName))
             {
                 Console.WriteLine("Kan inte lämna fältet tomt. Du måste skriva någonting.");
                 return false;
@@ -57,14 +57,14 @@
             return true;
         }
 
-        private bool LäsInÅlder() // Kollar om användaren matar in rätt datatyp för ålder, om inte så skrivs ett fel meddelande ut.
+        private bool ReadCustomerAge() // Kollar om användaren matar in rätt datatyp för age, om inte så skrivs ett fel meddelande ut.
         {
             Console.Write("Ange kundens ålder: ");
             string input = Console.ReadLine();
                         
-            if (int.TryParse(input, out int ålder))
+            if (int.TryParse(input, out int age))
             {
-                kundÅlder = ålder;
+                CustomerAge = age;
                 return true;
             }
             else
@@ -74,15 +74,15 @@
             }
         }
 
-        private void KundÅlderVillkor() // Kollar hur gammal kunden är. 
+        private void CustomerAgeTerms() // Kollar hur gammal kunden är. 
         {
-            if (kundÅlder < 15)
+            if (CustomerAge < 15)
             {
                 Console.WriteLine("Kunden får inte hyra en cykel eftersom hen är under 15 år. Programmet avslutas."); // Om kunden är 15 år anges ett fel meddelande och sen stängs programmet ner med en gång.
                 Environment.Exit(0);
             }
 
-            else if (kundÅlder >= 15 && kundÅlder <= 17)
+            else if (CustomerAge >= 15 && CustomerAge <= 17)
             {
                 Console.WriteLine("Kunden är mellan 15 och 17 år. Hen får hyra en cykel men inte en elcykel."); // Om kunden är mellan 15 - 17 år då går den andra in.
             }
@@ -93,7 +93,7 @@
             }
         }
 
-        private bool LäsInMedlemskap() // Kollar om användaren har matat in rätt information för medlemskap.
+        private bool ReadCustomerMembership() // Kollar om användaren har matat in rätt information för medlemskap.
         {
             Console.Write("Är kunden medlem? (ja/nej): ");
 
@@ -101,12 +101,12 @@
 
             if (input == "ja")
             {
-                ärMedlem = true;
+                IsMember = true;
                 return true;
             }
             else if (input == "nej")
             {
-                ärMedlem = false;
+                IsMember = false;
                 return true;
             }
             else
@@ -116,28 +116,28 @@
             }
         }
 
-        private void VisaKundInfo() // Visar kund info, inte mer än det. 
+        private void ShowCustomerInfo() // Visar kund info, inte mer än det. 
         {
-            string statusMedlem = ärMedlem ? "ja" : "nej"; // Om ärMedlem är true skriver "ja" ut, om den är false skriver den ut "nej". 
+            string statusMember = IsMember ? "ja" : "nej"; // Om IsMember är true skriver "ja" ut, om den är false skriver den ut "nej". 
 
-            Console.WriteLine($"Kundnamn: {kundNamn}");
-            Console.WriteLine($"Kundålder: {kundÅlder}");
-            Console.WriteLine($"Är medlem: {statusMedlem}");
+            Console.WriteLine($"Kundnamn: {CustomerName}");
+            Console.WriteLine($"Kundålder: {CustomerAge}");
+            Console.WriteLine($"Är medlem: {statusMember}");
         }
 
-        public string GetKundNamn()
+        public string GetCustomerName()
         {
-            return kundNamn;
+            return CustomerName;
         }
 
-        public int GetKundÅlderInt()
+        public int GetCustomerAgeInt()
         {
-            return kundÅlder;
+            return CustomerAge;
         }
 
-        public bool GetÄrMedlem()
+        public bool GetIsMember()
         {
-            return ärMedlem;
+            return IsMember;
         }  
     }
 }
